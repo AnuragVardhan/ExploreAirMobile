@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" title="Web">
+	
+	<fx:Script>
+		<![CDATA[
+			protected function internalButton_clickHandler(event:MouseEvent):void
+			{
+				navigator.pushView(InternalBrowser);
+			}
+			
+			protected function externalButton_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10" gap="10"/>
+	</s:layout>
+	
+	<s:Button label="Internal Browser" id="internalButton" click="internalButton_clickHandler(event)" />
 
-	<fx:Declarations>
-	</fx:Declarations>
+	<s:Button label="External Browser" id="externalButton" click="externalButton_clickHandler(event)" />
 </s:View>
+	

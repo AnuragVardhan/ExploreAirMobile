@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		creationComplete="init(event)" remove="removeHandler(event)" resize="fitViewToScreen()"
+		title="InternalBrowser">
+	
+	<s:layout>
+		<s:VerticalLayout paddingBottom="5" paddingTop="5" />
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import spark.events.ViewNavigatorEvent;
+			
+			public var webView:StageWebView;
+			
+			private function fitViewToScreen():void{
+				
+				if(webView)
+				{
+					webView.viewPort = new Rectangle(0, stage.height - height, width, height);
+				}
+			}
+			
+			protected function removeHandler(event:FlexEvent):void
+			{
+				webView.dispose();
+			}
+			
+			private function init(event:FlexEvent):void 
+			{
+				webView = new StageWebView();
+				
+				fitViewToScreen();
+				
+				webView.stage = stage;
+				
+				webView.loadURL("http://www.bbc.co.uk/news");
+				
+				webView.addEventListener(ErrorEvent.ERROR, handleWebError);
+				
+				webView.addEventListener(Event.COMPLETE, handleWebSuccess);
+			}
+			
+			private function handleWebError(event:ErrorEvent):void
+			{
+				errorLabel.visible = true;
+			}
+			
+			private function handleWebSuccess(event:Event):void
+			{
+				errorLabel.visible = false;
+			}
+			
+			protected function goToURLButton_clickHandler(event:MouseEvent):void
+			{
+				if(webView)
+				{
+					errorLabel.visible = false;
+					webView.loadURL(urlInput.text);
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:titleContent>
+		<s:Group width="100%" height="100%">
+			<s:TextInput id="urlInput" left="2" right="{5 + goToURLButton.width}"
+						 prompt="Enter a URL"/>
+			<s:Button id="goToURLButton" right="2" label="Go"
+					  click="goToURLButton_clickHandler(event)"/>
+		</s:Group>
+	</s:titleContent>
+	
+	<s:Label id="errorLabel" visible="false" text="Invalid URL"/>
+</s:View>
