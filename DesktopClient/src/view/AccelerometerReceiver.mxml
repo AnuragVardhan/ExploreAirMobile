@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 creationComplete="init()">
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center"/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import network.NetworkConnector;
+			
+			private var networkConnector:NetworkConnector = new NetworkConnector();
+			
+			private function init():void
+			{
+				networkConnector.addEventListener(NetworkConnector.MESSAGE_RECEIVED, messageReceived);
+			}
+			
+			private function messageReceived(event:NetStatusEvent):void
+			{
+				arrowImage.rotation = event.info.message;
+			}
+			
+			
+			protected function sendButton_clickHandler(event:MouseEvent):void
+			{
+				networkConnector.sendMessage("" + Math.round(Math.random()*360));				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Label text="Accelerometer Receiver" fontWeight="bold" />
+	
+	<s:Image id="arrowImage" source="@Embed(source='assets/Red-Arrow.gif')" height="300" width="300"/>
+</s:Group>

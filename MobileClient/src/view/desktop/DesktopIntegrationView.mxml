@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="DesktopIntegrationView" 
+		creationComplete="init()">
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center"/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.net.dns.AAAARecord;
+			import flash.sensors.Accelerometer;
+			private var connection:NetConnection;
+			
+			private var group:NetGroup;
+			
+			private var isConnected:Boolean = false;
+			
+			private var accelerometer:Accelerometer = new Accelerometer();
+			
+			private function init():void
+			{
+				accelerometer.addEventListener(AccelerometerEvent.UPDATE, onAccelerometerChange);
+				
+				connect();
+			}
+			
+			private function connect():void
+			{
+				connection = new NetConnection();
+				connection.addEventListener(NetStatusEvent.NET_STATUS, netStatus);
+				connection.connect("rtmfp:");
+			}
+			
+			private function netStatus(event:NetStatusEvent):void
+			{
+				status.appendText(event.info.code + "\n");
+				
+				switch(event.info.code)
+				{
+					case "NetConnection.Connect.Success":
+						setupGroup();
+						break;
+					case "NetGroup.Connect.Success":
+						break;
+					case "NetGroup.SendTo.Notify":
+						arrowImage.rotation = event.info.message;
+						break;
+					
+				}
+			}
+			
+			private function setupGroup():void
+			{
+				var groupSpec:GroupSpecifier = new GroupSpecifier("localDeviceConnections");
+				groupSpec.routingEnabled = true;
+				groupSpec.ipMulticastMemberUpdatesEnabled = true;
+				groupSpec.addIPMulticastAddress("224.255.0.0:35353");
+				groupSpec.multicastEnabled = true;
+				
+				group = new NetGroup(connection, groupSpec.groupspecWithAuthorizations());
+				
+				group.addEventListener(NetStatusEvent.NET_STATUS, netStatus);
+			}
+			
+			protected function sendButton_clickHandler(event:MouseEvent):void
+			{
+				group.sendToAllNeighbors(Math.round(Math.random()*360));				
+			}
+			
+			private function onAccelerometerChange(event:AccelerometerEvent):void
+			{
+				group.sendToAllNeighbors(Math.round(event.accelerationY*(-90)));
+			}
+			
+		]]>
+	</fx:Script>
+
+	<s:TextArea id="status" width="100%" height="80" fontSize="10"/>
+	
+	<s:Button id="sendButton" label="Send" click="sendButton_clickHandler(event)" />
+
+	<s:Image id="arrowImage" source="@Embed(source='assets/Red-Arrow.gif')" height="300" width="300"/>
+	
+	
+</s:View>

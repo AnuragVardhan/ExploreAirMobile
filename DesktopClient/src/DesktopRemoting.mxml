@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:view="view.*">
+
+	<s:states>
+		<s:State name="accelerometer" />
+		<s:State name="localChat" />
+	</s:states>
+	
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	
+	<s:HGroup>
+		<s:Button label="Accelerometer Receiver" click="currentState = 'accelerometer'" />
+		<s:Button label="Local Network Chat Client" click="currentState = 'localChat'" />
+	</s:HGroup>
+	
+	<view:AccelerometerReceiver id="accelerometer" width="100%" height="100%" includeIn="accelerometer"/>
+	
+	<view:LocalNetworkChat id="localChat" width="100%" height="100%" includeIn="localChat"/>
+	
+</s:WindowedApplication>
