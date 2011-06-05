@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="DesktopIntegrationView" >
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center"/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			protected function accelerometerTestButton_clickHandler(event:MouseEvent):void
+			{
+				navigator.pushView(AccelerometerLinkUp);
+				
+			}
+
+			protected function localChatButton_clickHandler(event:MouseEvent):void
+			{
+				navigator.pushView(LocalNetworkChat);				
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Button id="localChatButton" label="Local Network Chat" click="localChatButton_clickHandler(event)" />
+	<s:Button id="accelerometerTestButton" label="Accelerometer Test" click="accelerometerTestButton_clickHandler(event)" />
+</s:View>

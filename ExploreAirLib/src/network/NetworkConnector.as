@@ -49,7 +49,8 @@ package network
 				case "NetGroup.Connect.Success":
 					break;
 				case "NetGroup.SendTo.Notify":
-					dispatchEvent(event);
+					var newEvent:NetStatusEvent = new NetStatusEvent(MESSAGE_RECEIVED, false, false, event.info);
+					dispatchEvent(newEvent);
 					break;
 				
 			}
