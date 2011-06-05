@@ -2,8 +2,19 @@
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" title="Web">
 	
+	<s:navigationContent>
+		<s:Button id="backButton" label="&lt;-" 
+				  visible="{navigator.length > 1}" includeInLayout="{navigator.length > 1}" 
+				  click="navigator.popView()"/>
+	</s:navigationContent>
+	
+	<s:layout>
+		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+	</s:layout>
+	
 	<fx:Script>
 		<![CDATA[
+			import flash.net.navigateToURL;
 			protected function internalButton_clickHandler(event:MouseEvent):void
 			{
 				navigator.pushView(InternalBrowser);
@@ -11,16 +22,12 @@
 			
 			protected function externalButton_clickHandler(event:MouseEvent):void
 			{
-				// TODO Auto-generated method stub
-				
+				navigateToURL(new URLRequest('http://www.google.com'));
 			}
 			
 		]]>
 	</fx:Script>
 	
-	<s:layout>
-		<s:VerticalLayout paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10" gap="10"/>
-	</s:layout>
 	
 	<s:Button label="Internal Browser" id="internalButton" click="internalButton_clickHandler(event)" />
 

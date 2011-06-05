@@ -3,6 +3,12 @@
 		xmlns:s="library://ns.adobe.com/flex/spark" title="Accelerometer Link Up Test" 
 		creationComplete="init()">
 	
+	<s:navigationContent>
+		<s:Button id="backButton" label="&lt;-" 
+				  visible="{navigator.length > 1}" includeInLayout="{navigator.length > 1}" 
+				  click="navigator.popView()"/>
+	</s:navigationContent>
+	
 	<s:layout>
 		<s:VerticalLayout horizontalAlign="center"/>
 	</s:layout>

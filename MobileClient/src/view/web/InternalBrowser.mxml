@@ -4,6 +4,12 @@
 		creationComplete="init(event)" remove="removeHandler(event)" resize="fitViewToScreen()"
 		title="InternalBrowser">
 	
+	<s:navigationContent>
+		<s:Button id="backButton" label="&lt;-" 
+				  visible="{navigator.length > 1}" includeInLayout="{navigator.length > 1}" 
+				  click="navigator.popView()"/>
+	</s:navigationContent>
+	
 	<s:layout>
 		<s:VerticalLayout paddingBottom="5" paddingTop="5" />
 	</s:layout>
@@ -54,7 +60,7 @@
 				errorLabel.visible = false;
 			}
 			
-			protected function goToURLButton_clickHandler(event:MouseEvent):void
+			protected function goToUrl():void
 			{
 				if(webView)
 				{
@@ -69,9 +75,9 @@
 	<s:titleContent>
 		<s:Group width="100%" height="100%">
 			<s:TextInput id="urlInput" left="2" right="{5 + goToURLButton.width}"
-						 prompt="Enter a URL"/>
+						 prompt="Enter a URL" enter="goToUrl()"/>
 			<s:Button id="goToURLButton" right="2" label="Go"
-					  click="goToURLButton_clickHandler(event)"/>
+					  click="goToUrl()"/>
 		</s:Group>
 	</s:titleContent>
 	

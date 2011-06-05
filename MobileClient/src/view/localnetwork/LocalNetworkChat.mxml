@@ -3,6 +3,12 @@
 		xmlns:s="library://ns.adobe.com/flex/spark" title="LocalNetworkChat"
 		creationComplete="init()">
 	
+	<s:navigationContent>
+		<s:Button id="backButton" label="&lt;-" 
+				  visible="{navigator.length > 1}" includeInLayout="{navigator.length > 1}" 
+				  click="navigator.popView()"/>
+	</s:navigationContent>
+	
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
