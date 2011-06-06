@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:TabbedViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
-								  xmlns:s="library://ns.adobe.com/flex/spark" width="100%" height="100%">
+								  xmlns:s="library://ns.adobe.com/flex/spark"
+								  applicationComplete="applicationCompleteHandler(event)">
 	<fx:Script>
 		<![CDATA[
-			import view.nativeapps.NativeAppsView;
+			/*
+			TODO
+				Text (map location)
+				Phone
+				Include GPS
+				Email integration
+				Tweet app	
+				Local Database Integration
+				Microphone
+				Multitouch
+				Splash Screen
+			*/
+			
+			
+			import mx.events.FlexEvent;
+			
 			import view.home.HomeView;
 			import view.localnetwork.DesktopIntegrationView;
+			import view.nativeapps.NativeAppsView;
 			import view.web.WebView;
+			
+			protected function applicationCompleteHandler(event:FlexEvent):void
+			{
+				stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;				
+			}
+			
 		]]>
 	</fx:Script>
 	

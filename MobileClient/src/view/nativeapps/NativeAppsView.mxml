@@ -4,8 +4,10 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import view.camera.CameraView;
 			import view.maps.MapsView;
 			import view.web.WebView;
+			
 			protected function webButton_clickHandler(event:MouseEvent):void
 			{
 				navigator.pushView(WebView);				
@@ -14,6 +16,11 @@
 			protected function mapsButton_clickHandler(event:MouseEvent):void
 			{
 				navigator.pushView(MapsView);				
+			}
+			
+			protected function cameraButton_clickHandler(event:MouseEvent):void
+			{
+				navigator.pushView(CameraView);				
 			}
 			
 		]]>
@@ -31,4 +38,5 @@
 	
 	<s:Button id="webButton" label="Web" click="webButton_clickHandler(event)" />
 	<s:Button id="mapsButton" label="Maps" click="mapsButton_clickHandler(event)" />
+	<s:Button id="cameraButton" label="Camera" click="cameraButton_clickHandler(event)" />
 </s:View>
