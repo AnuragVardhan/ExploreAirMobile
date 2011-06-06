@@ -1,0 +1,21 @@
+FEATURES TODO
+	Include GPS with maps
+	Local Database Integration
+	Splash Screen
+
+FEATURES MAYBE
+	Multitouch
+			
+IMPLEMENTATIONS
+	Tweet app	
+	LinkedIn (see RIAGora)
+	Microphone
+			
+ISSUES
+	Text map location (LinkUp?) NOT POSSIBLE WITH Android 
+	Google maps integration SLOW. Change (first go to screen, show loading, then map)
+	Resizing when keyboard is used in chat
+	Native camera integration
+	Natural camera orientation (need to reset when camera is created?) 
+	use embedded camera and see that camera starts off tilted weirdly
+			

@@ -4,6 +4,8 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import flash.net.navigateToURL;
+			
 			import view.camera.CameraView;
 			import view.maps.MapsView;
 			import view.web.WebView;
@@ -23,6 +25,20 @@
 				navigator.pushView(CameraView);				
 			}
 			
+			protected function emailButton_clickHandler(event:MouseEvent):void
+			{
+				navigateToURL(new URLRequest("mailto:simon.shillaker@ubs.com?subject=Test\%20Subject&body=Test\%20Body"));				
+			}
+			
+			protected function phoneButton_clickHandler(event:MouseEvent):void
+			{
+				navigateToURL(new URLRequest('tel:123456789'));
+			}
+			
+			protected function smsButton_clickHandler(event:MouseEvent):void
+			{
+				navigateToURL(new URLRequest('sms:1234567890'));
+			}
 		]]>
 	</fx:Script>
 	
@@ -39,4 +55,7 @@
 	<s:Button id="webButton" label="Web" click="webButton_clickHandler(event)" />
 	<s:Button id="mapsButton" label="Maps" click="mapsButton_clickHandler(event)" />
 	<s:Button id="cameraButton" label="Camera" click="cameraButton_clickHandler(event)" />
+	<s:Button id="emailButton" label="Email" click="emailButton_clickHandler(event)" />
+	<s:Button id="phoneButton" label="Phone" click="phoneButton_clickHandler(event)"/>
+	<s:Button id="smsButton" label="SMS" click="smsButton_clickHandler(event)"/>
 </s:View>

@@ -4,24 +4,10 @@
 								  applicationComplete="applicationCompleteHandler(event)">
 	<fx:Script>
 		<![CDATA[
-			/*
-			TODO
-				Text (map location)
-				Phone
-				Include GPS
-				Email integration
-				Tweet app	
-				Local Database Integration
-				Microphone
-				Multitouch
-				Splash Screen
-			*/
-			
-			
 			import mx.events.FlexEvent;
 			
 			import view.home.HomeView;
-			import view.localnetwork.DesktopIntegrationView;
+			import view.localnetwork.LocalNetworkView;
 			import view.nativeapps.NativeAppsView;
 			import view.web.WebView;
 			
@@ -35,11 +21,14 @@
 	
 	<s:TabbedViewNavigator id="tabbedViewNavigator" width="100%" height="100%">
 		
-		<s:ViewNavigator label="Home" id="home" firstView="{HomeView}" width="100%" height="100%"/>
+		<s:ViewNavigator label="Home" id="home" firstView="{HomeView}" width="100%" height="100%" 
+						 hide="home.popToFirstView()"/>
 		
-		<s:ViewNavigator label="Native Apps" id="nativeApps" firstView="{NativeAppsView}" width="100%" height="100%"/>
+		<s:ViewNavigator label="Native Apps" id="nativeApps" firstView="{NativeAppsView}" width="100%" height="100%"
+						 hide="nativeApps.popToFirstView()"/>
 		
-		<s:ViewNavigator label="Local Network" id="desktop" firstView="{DesktopIntegrationView}" width="100%" height="100%" />
+		<s:ViewNavigator label="Other Things" id="otherThings" firstView="{LocalNetworkView}" width="100%" height="100%" 
+						 hide="otherThings.popToFirstView()"/>
 	</s:TabbedViewNavigator>
 	
 </s:TabbedViewNavigatorApplication>
