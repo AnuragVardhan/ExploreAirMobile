@@ -62,20 +62,20 @@
 
 	<s:Label id="errorLabel" horizontalCenter="0" verticalCenter="0" width="100%"/>
 
-	<s:VGroup left="5" right="5" 
+	<s:VGroup left="5" right="5" height="100%" 
 			  paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" 
 			  id="mainViewGroup" visible="{db.initialised}" horizontalAlign="center">
 		<s:HGroup width="100%">
 			<s:Label text="Username: "/>
-			<s:TextInput id="userNameInput"/>
+			<s:TextInput id="userNameInput" width="100%"/>
 		</s:HGroup>
 		<s:HGroup width="100%">
 			<s:Label text="Name:" />			
-			<s:TextInput id="nameInput" />
+			<s:TextInput id="nameInput" width="100%"/>
 		</s:HGroup>
 		<s:HGroup width="100%">
 			<s:Label text="Email:" />
-			<s:TextInput id="emailInput" />
+			<s:TextInput id="emailInput" width="100%"/>
 		</s:HGroup>
 		<s:Button label="Add User" id="addUserButton" click="handleAddUser(event)"/>
 		
