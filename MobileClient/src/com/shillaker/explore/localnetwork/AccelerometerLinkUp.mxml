@@ -4,13 +4,13 @@
 		creationComplete="initialise()">
 	
 	<s:navigationContent>
-		<s:Button id="backButton" label="&lt;-" 
+		<s:Button id="backButton" label="Back" 
 				  visible="{navigator.length > 1}" includeInLayout="{navigator.length > 1}" 
 				  click="navigator.popView()"/>
 	</s:navigationContent>
 	
 	<s:layout>
-		<s:VerticalLayout horizontalAlign="center"/>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</s:layout>
 	
 	<fx:Script>
@@ -36,6 +36,6 @@
 		]]>
 	</fx:Script>
 	
-	<s:Label text="Move phone to move arrow on other machines." />
+	<s:Label text="Move phone to move arrow on listening desktops." />
 	
 </s:View>

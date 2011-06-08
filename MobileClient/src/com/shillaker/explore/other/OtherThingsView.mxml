@@ -4,8 +4,8 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import com.shillaker.gps.GPSView;
-			import com.shillaker.localnetwork.LocalNetworkView;
+			import com.shillaker.explore.gps.GPSView;
+			import com.shillaker.explore.localnetwork.LocalNetworkView;
 			protected function localNetworkButton_clickHandler(event:MouseEvent):void
 			{
 				navigator.pushView(LocalNetworkView);				

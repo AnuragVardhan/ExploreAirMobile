@@ -6,9 +6,9 @@
 		<![CDATA[
 			import mx.events.FlexEvent;
 			
-			import com.shillaker.home.HomeView;
-			import com.shillaker.nativeapps.NativeAppsView;
-			import com.shillaker.other.OtherThingsView;
+			import com.shillaker.explore.home.HomeView;
+			import com.shillaker.explore.nativeapps.NativeAppsView;
+			import com.shillaker.explore.other.OtherThingsView;
 			
 			protected function applicationCompleteHandler(event:FlexEvent):void
 			{

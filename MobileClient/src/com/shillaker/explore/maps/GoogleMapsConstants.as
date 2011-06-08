@@ -1,4 +1,4 @@
-package com.shillaker.maps
+package com.shillaker.explore.maps
 {
 	public class GoogleMapsConstants
 	{

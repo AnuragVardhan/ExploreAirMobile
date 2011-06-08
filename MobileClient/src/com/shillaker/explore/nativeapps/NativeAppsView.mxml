@@ -6,9 +6,9 @@
 		<![CDATA[
 			import flash.net.navigateToURL;
 			
-			import com.shillaker.camera.CameraView;
-			import com.shillaker.maps.MapsView;
-			import com.shillaker.web.WebView;
+			import com.shillaker.explore.camera.CameraView;
+			import com.shillaker.explore.maps.MapsView;
+			import com.shillaker.explore.web.WebView;
 			
 			protected function webButton_clickHandler(event:MouseEvent):void
 			{

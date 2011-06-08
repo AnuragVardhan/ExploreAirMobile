@@ -1,11 +1,18 @@
 FEATURES TODO
-	Include GPS with maps
-	Re-integrate accelerometer thing
 	Local Database Integration
+
+	Include NetworkStatus API for using local chat
+	Handle Hide behaviour especially on GPS
+	Rename initialise methods
+	
+	Server chat using pub sub?
+
+	Re-integrate accelerometer thing
 	Splash Screen
 	BlazeDS Communication
-	Twitter integration	
 
+	Read about pixel densities (blue box) http://wwwimages.adobe.com/www.adobe.com/content/dam/Adobe/en/devnet/flex/articles/twitter-trends/build-first-mobile-flex-app.pdf
+	
 FEATURES MAYBE
 	Multitouch
 			

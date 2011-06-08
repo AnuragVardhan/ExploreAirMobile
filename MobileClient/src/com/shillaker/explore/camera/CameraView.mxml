@@ -18,7 +18,7 @@
 	</fx:Script>
 	
 	<s:navigationContent>
-		<s:Button id="backButton" label="&lt;-" 
+		<s:Button id="backButton" label="Back" 
 				  visible="{navigator.length > 1}" includeInLayout="{navigator.length > 1}" 
 				  click="navigator.popView()"/>
 	</s:navigationContent>

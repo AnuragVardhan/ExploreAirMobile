@@ -40,32 +40,9 @@
 				map.percentWidth = 100;
 				mapGroup.addElement(map);
 			}
-
-			private function geoCodingSuccess(event:GeocodingEvent):void 
-			{
-				isMapReady = true;
-				
-				trace(event.response.placemarks[0]);
-				
-				var firstPlaceMark:Placemark = Placemark(event.response.placemarks[0]);
-				
-				map.setCenter(firstPlaceMark.point);
-			}
-			
-			private function geoCodingFailure(event:GeocodingEvent):void
-			{
-				trace(event.response);
-			}
-			
 			
 			protected function handleMapReady(event:MapEvent):void
 			{
-				geoCoder = new ClientGeocoder(new ClientGeocoderOptions({
-					countryCode: "GB"}));
-				
-				geoCoder.addEventListener(GeocodingEvent.GEOCODING_SUCCESS, geoCodingSuccess);
-				geoCoder.addEventListener(GeocodingEvent.GEOCODING_FAILURE, geoCodingFailure);
-				
 				isMapReady = true;
 				
 				map.setCenter(new LatLng(40.736072, -73.992062), 14, MapType.NORMAL_MAP_TYPE);	
