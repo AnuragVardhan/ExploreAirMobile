@@ -4,6 +4,7 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import com.shillaker.explore.db.DatabaseView;
 			import com.shillaker.explore.gps.GPSView;
 			import com.shillaker.explore.localnetwork.LocalNetworkView;
 			protected function localNetworkButton_clickHandler(event:MouseEvent):void
@@ -14,6 +15,12 @@
 			protected function gpsButton_clickHandler(event:MouseEvent):void
 			{
 				navigator.pushView(GPSView);
+			}
+			
+			protected function localDbButton_clickHandler(event:MouseEvent):void
+			{
+				navigator.pushView(DatabaseView);
+				
 			}
 			
 		]]>
@@ -30,6 +37,7 @@
 		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</s:layout>
 	
+	<s:Button id="localDbButton" label="Local DB" click="localDbButton_clickHandler(event)" />
 	<s:Button id="localNetworkButton" label="Local Network" click="localNetworkButton_clickHandler(event)" />
 	<s:Button id="gpsButton" label="GPS" click="gpsButton_clickHandler(event)" />
 </s:View>
