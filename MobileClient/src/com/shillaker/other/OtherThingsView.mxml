@@ -4,8 +4,8 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import view.gps.GPSView;
-			import view.localnetwork.LocalNetworkView;
+			import com.shillaker.gps.GPSView;
+			import com.shillaker.localnetwork.LocalNetworkView;
 			protected function localNetworkButton_clickHandler(event:MouseEvent):void
 			{
 				navigator.pushView(LocalNetworkView);				
@@ -27,7 +27,7 @@
 	</s:navigationContent>
 	
 	<s:layout>
-		<s:VerticalLayout horizontalAlign="center"/>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</s:layout>
 	
 	<s:Button id="localNetworkButton" label="Local Network" click="localNetworkButton_clickHandler(event)" />

@@ -9,7 +9,7 @@
 	</s:navigationContent>
 	
 	<s:layout>
-		<s:VerticalLayout horizontalAlign="center"/>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</s:layout>
 	
 	<fx:Script>

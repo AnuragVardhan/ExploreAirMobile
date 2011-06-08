@@ -1,0 +1,28 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mobile "spark.skins.mobile.*";
+
+s|ViewNavigator {
+	fontSize: 16px;
+}
+
+s|ButtonBarButton {
+	fontSize: 16px;
+}
+
+s|List {
+	fontSize: 16px;	
+}
+
+s|Button {
+	fontSize: 16px;
+}
+
+s|Label {
+	fontSize: 16px;
+}
+
+.title {
+	fontSize: 18px;
+	fontWeight: bold;
+}

@@ -1,21 +1,25 @@
 FEATURES TODO
 	Include GPS with maps
+	Re-integrate accelerometer thing
 	Local Database Integration
 	Splash Screen
+	BlazeDS Communication
+	Twitter integration	
 
 FEATURES MAYBE
 	Multitouch
 			
 IMPLEMENTATIONS
-	Tweet app	
-	LinkedIn (see RIAGora)
 	Microphone
 			
 ISSUES
-	Text map location (LinkUp?) NOT POSSIBLE WITH Android 
+	Inserting MMS body NOT POSSIBLE WITH Android 
 	Google maps integration SLOW. Change (first go to screen, show loading, then map)
 	Resizing when keyboard is used in chat
 	Native camera integration
 	Natural camera orientation (need to reset when camera is created?) 
 	use embedded camera and see that camera starts off tilted weirdly
+	
+LIMITATIONS
+	BlazeDS can't do true push messaging (only have long polling)
 			

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
 		xmlns:s="library://ns.adobe.com/flex/spark"
-		creationComplete="init(event)" remove="removeHandler(event)" resize="fitViewToScreen()"
+		creationComplete="initialise(event)" remove="removeHandler(event)" resize="fitViewToScreen()"
 		title="InternalBrowser">
 	
 	<s:navigationContent>
@@ -35,7 +35,7 @@
 				webView.dispose();
 			}
 			
-			private function init(event:FlexEvent):void 
+			private function initialise(event:FlexEvent):void 
 			{
 				webView = new StageWebView();
 				

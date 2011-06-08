@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" title="LocalNetworkChat"
-		creationComplete="init()">
+		creationComplete="initialise()">
 	
 	<s:navigationContent>
 		<s:Button id="backButton" label="&lt;-" 
@@ -17,7 +17,7 @@
 			
 			private var networkConnector:NetworkConnector = new NetworkConnector();
 			
-			private function init():void
+			private function initialise():void
 			{
 				networkConnector.addEventListener(NetworkConnector.MESSAGE_RECEIVED, onMessageReceived);
 			}
