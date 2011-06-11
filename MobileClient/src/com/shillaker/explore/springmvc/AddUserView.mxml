@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="AddUserView">
+
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle" />
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.shillaker.explore.db.User;
+			
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			private var connector:ServerConnector = ServerConnector.getInstance();
+			
+			private function resultFunction(result:ResultEvent):void
+			{
+				var xml:XML = XML(result.result);
+				
+				resultLabel.text = xml.toString();
+			}
+			
+			private function faultFunction(fault:FaultEvent):void
+			{
+				resultLabel.text = fault.fault.message;
+			}
+			
+			protected function addUserButton_clickHandler(event:MouseEvent):void
+			{
+				var user:User = new User();
+				
+				user.name = nameInput.text;
+				user.username = nameInput.text;
+				
+				connector.doServerConnectorCall('users/',
+					resultFunction,
+					faultFunction,
+					'POST',
+					user.toXML().toString());
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Label text="Username: " />
+	<s:TextInput id="usernameInput" width="100%" />
+	
+	<s:Label text="Name: " />
+	<s:TextInput id="nameInput" width="100%" />
+
+	<s:Button label="Add User" id="addUserButton" click="addUserButton_clickHandler(event)" />
+	
+	<s:Label text="Result: " />
+	<s:Label id="resultLabel" width="100%" />
+</s:View>

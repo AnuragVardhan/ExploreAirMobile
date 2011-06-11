@@ -7,6 +7,7 @@
 			import com.shillaker.explore.db.DatabaseView;
 			import com.shillaker.explore.gps.GPSView;
 			import com.shillaker.explore.localnetwork.LocalNetworkView;
+			import com.shillaker.explore.springmvc.SpringMVCView;
 			protected function localNetworkButton_clickHandler(event:MouseEvent):void
 			{
 				navigator.pushView(LocalNetworkView);				
@@ -23,6 +24,11 @@
 				
 			}
 			
+			protected function springMVCServer_clickHandler(event:MouseEvent):void
+			{
+				navigator.pushView(SpringMVCView);			
+			}
+			
 		]]>
 	</fx:Script>
 	
@@ -37,6 +43,7 @@
 		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</s:layout>
 	
+	<s:Button id="springMVCServer" label="Spring MVC Server" click="springMVCServer_clickHandler(event)" />
 	<s:Button id="localDbButton" label="Local DB" click="localDbButton_clickHandler(event)" />
 	<s:Button id="localNetworkButton" label="Local Network" click="localNetworkButton_clickHandler(event)" />
 	<s:Button id="gpsButton" label="GPS" click="gpsButton_clickHandler(event)" />
