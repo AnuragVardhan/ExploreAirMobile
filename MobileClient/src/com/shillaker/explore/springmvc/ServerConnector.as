@@ -40,14 +40,13 @@ package com.shillaker.explore.springmvc
 					break;
 			}
 			
-			if( parms == null )
-			{
-				parms = new Object();
-			}
-			
 			httpService.url = SERVER_URL + url;
 			httpService.resultFormat = 'e4x';
-			httpService.contentType = 'application/xml';
+			
+			if(parms != null) {
+				httpService.contentType = 'application/xml';
+			}
+			
 			httpService.addEventListener( ResultEvent.RESULT, resultFunction );
 			
 			if( faultFunction != null )
