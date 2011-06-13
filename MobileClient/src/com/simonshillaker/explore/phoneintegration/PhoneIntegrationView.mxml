@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<core:VerticalCenteredViewWithBackButton xmlns:core="com.simonshillaker.explore.core.*"
+		xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="{resourceManager.getString('explore_air_mobile', 'phone_integration_title')}">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.simonshillaker.explore.camera.CameraView;
+			import com.simonshillaker.explore.gps.GPSView;
+			import com.simonshillaker.explore.localdb.LocalDatabaseView;
+			import com.simonshillaker.explore.localnetwork.LocalNetworkView;
+			import com.simonshillaker.explore.maps.MapsView;
+			import com.simonshillaker.explore.web.WebView;
+			
+			protected function webButton_clickHandler(event:MouseEvent):void
+			{
+				navigator.pushView(WebView);				
+			}
+			
+			protected function mapsButton_clickHandler(event:MouseEvent):void
+			{
+				navigator.pushView(MapsView);				
+			}
+			
+			protected function cameraButton_clickHandler(event:MouseEvent):void
+			{
+				navigator.pushView(CameraView);				
+			}
+			
+			protected function emailButton_clickHandler(event:MouseEvent):void
+			{
+				navigateToURL(new URLRequest("mailto:simon.shillaker@ubs.com?subject=Test\%20Subject&body=Test\%20Body"));				
+			}
+			
+			protected function phoneButton_clickHandler(event:MouseEvent):void
+			{
+				navigateToURL(new URLRequest('tel:123456789'));
+			}
+			
+			protected function smsButton_clickHandler(event:MouseEvent):void
+			{
+				navigateToURL(new URLRequest('sms:1234567890'));
+			}
+			protected function localNetworkButton_clickHandler(event:MouseEvent):void
+			{
+				navigator.pushView(LocalNetworkView);				
+			}
+			
+			protected function gpsButton_clickHandler(event:MouseEvent):void
+			{
+				navigator.pushView(GPSView);
+			}
+			
+			protected function localDbButton_clickHandler(event:MouseEvent):void
+			{
+				navigator.pushView(LocalDatabaseView);
+				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Button id="localDbButton" label="Local DB" width="100%" click="localDbButton_clickHandler(event)" />
+	<s:Button id="localNetworkButton" label="Local Network" width="100%" click="localNetworkButton_clickHandler(event)" />
+	<s:Button id="gpsButton" label="GPS" width="100%" click="gpsButton_clickHandler(event)" />
+	<s:Button id="webButton" label="Web" width="100%" click="webButton_clickHandler(event)" />
+	<s:Button id="mapsButton" label="Maps" width="100%" click="mapsButton_clickHandler(event)" />
+	<s:Button id="cameraButton" label="Camera" width="100%" click="cameraButton_clickHandler(event)" />
+	<s:Button id="emailButton" label="Email" width="100%" click="emailButton_clickHandler(event)" />
+	<s:Button id="phoneButton" label="Phone" width="100%" click="phoneButton_clickHandler(event)"/>
+	<s:Button id="smsButton" label="SMS" width="100%" click="smsButton_clickHandler(event)"/>
+
+</core:VerticalCenteredViewWithBackButton>

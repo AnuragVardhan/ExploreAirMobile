@@ -4,7 +4,7 @@
 		xmlns:s="library://ns.adobe.com/flex/spark"
 		creationComplete="initialise(event)" 
 		remove="removeHandler(event)" resize="fitViewToScreen()"
-		title="Internal Browser">
+		title="{resourceManager.getString('explore_air_mobile', 'internal_browser_title')}">
 	
 	<fx:Script>
 		<![CDATA[

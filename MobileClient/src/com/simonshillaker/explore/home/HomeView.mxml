@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="{resourceManager.getString('explore_air_mobile', 'home_title')}" 
+		xmlns:core="com.simonshillaker.explore.core.*">
+	<fx:Script>
+		<![CDATA[
+			import flash.net.navigateToURL;
+			
+			import mx.resources.IResourceManager;
+			import mx.resources.ResourceManager;
+			
+			protected function navigateToBlog():void
+			{
+				var blog_url:String = resourceManager.getString('explore_air_mobile', 'blog_url');
+				navigateToURL(new URLRequest(blog_url));
+			}
+			
+			protected function navigateToTourDeFlex():void
+			{
+				var tourDeFlexUrl:String = resourceManager.getString('explore_air_mobile', 'tour_de_flex_url');		
+				navigateToURL(new URLRequest(tourDeFlexUrl));
+			}
+		]]>
+	</fx:Script>
+	
+	<s:VGroup gap="20" 
+			  horizontalAlign="center" 
+			  verticalAlign="middle" 
+			  paddingBottom="5" paddingLeft="5" paddingTop="5" paddingRight="5"
+			  width="100%" height="100%">
+
+		<s:Label text="{resourceManager.getString('explore_air_mobile', 'home_welcome_text')}" 
+				 width="100%"/>
+	
+		<s:Button label="{resourceManager.getString('explore_air_mobile', 'blog_button_label')}"
+				  click="navigateToBlog()"
+				  width="100%"/>
+		
+		<s:Label text="{resourceManager.getString('explore_air_mobile', 'tour_de_flex_note')}" 
+				 width="100%"/>
+		
+		<s:Button label="{resourceManager.getString('explore_air_mobile', 'tour_de_flex_button_label')}"
+				  click="navigateToTourDeFlex()"
+				  width="100%"/>
+	</s:VGroup>
+	
+
+</s:View>

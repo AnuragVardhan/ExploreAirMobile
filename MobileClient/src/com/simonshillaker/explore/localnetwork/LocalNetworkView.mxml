@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <core:VerticalCenteredViewWithBackButton xmlns:core="com.simonshillaker.explore.core.*"
 		xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" title="Local Network" >
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="{resourceManager.getString('explore_air_mobile', 'local_network_title')}" >
 	
-	<fx:Script>
-		<![CDATA[
-			protected function accelerometerTestButton_clickHandler(event:MouseEvent):void
-			{
-				navigator.pushView(AccelerometerView);
-				
-			}
-
-			protected function localChatButton_clickHandler(event:MouseEvent):void
-			{
-				navigator.pushView(LocalNetworkChat);				
-			}
-		]]>
-	</fx:Script>
+	<s:Button id="localChatButton" 
+			  label="Local Network Chat" 
+			  width="100%" 
+			  click="navigator.pushView(LocalNetworkChat)" />
 	
-	<s:Button id="localChatButton" label="Local Network Chat" click="localChatButton_clickHandler(event)" />
-	<s:Button id="accelerometerTestButton" label="Accelerometer Test" click="accelerometerTestButton_clickHandler(event)" />
+	<s:Button id="accelerometerTestButton" 
+			  label="Accelerometer Test" 
+			  width="100%" 
+			  click="navigator.pushView(AccelerometerView)" />
 
 </core:VerticalCenteredViewWithBackButton>

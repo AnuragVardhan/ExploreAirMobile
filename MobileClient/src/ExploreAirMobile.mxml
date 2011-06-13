@@ -11,9 +11,8 @@
 		<![CDATA[
 			import mx.events.FlexEvent;
 			
-			import com.simonshillaker.explore.tab1.HomeView;
-			import com.simonshillaker.explore.tab2.NativeAppsView;
-			import com.simonshillaker.explore.tab3.OtherThingsView;
+			import com.simonshillaker.explore.home.HomeView;
+			import com.simonshillaker.explore.phoneintegration.PhoneIntegrationView;
 			
 			protected function applicationCompleteHandler(event:FlexEvent):void
 			{
@@ -25,16 +24,12 @@
 	
 	<fx:Style source="ExploreAirMobileStyles.css" />
 	
-	<s:ViewNavigator label="{resourceManager.getString('explore_air_mobile', 'tab_1_title')}" 
-					 id="tab1" firstView="{HomeView}" width="100%" height="100%" 
-						 hide="tab1.popToFirstView()"/>
+	<s:ViewNavigator label="{resourceManager.getString('explore_air_mobile', 'home_title')}" 
+					 id="homeTab" firstView="{HomeView}" width="100%" height="100%" 
+						 hide="homeTab.popToFirstView()"/>
 		
-	<s:ViewNavigator label="{resourceManager.getString('explore_air_mobile', 'tab_2_title')}" 
-					 id="tab2" firstView="{NativeAppsView}" width="100%" height="100%"
-						 hide="tab2.popToFirstView()"/>
+	<s:ViewNavigator label="{resourceManager.getString('explore_air_mobile', 'phone_integration_title')}" 
+					 id="integrationTab" firstView="{PhoneIntegrationView}" width="100%" height="100%"
+						 hide="integrationTab.popToFirstView()"/>
 		
-	<s:ViewNavigator label="{resourceManager.getString('explore_air_mobile', 'tab_3_title')}" 
-					 id="tab3" firstView="{OtherThingsView}" width="100%" height="100%" 
-						 hide="tab3.popToFirstView()"/>
-
 </s:TabbedViewNavigatorApplication>

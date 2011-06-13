@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <core:VerticalCenteredViewWithBackButton xmlns:core="com.simonshillaker.explore.core.*"
 		xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" title="NativeCameraView" creationComplete="initialise()">
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="{resourceManager.getString('explore_air_mobile', 'device_camera_title')}" 
+		creationComplete="onCreationComplete()">
 	
 	<fx:Script>
 		<![CDATA[
@@ -14,7 +16,7 @@
 			[Bindable]
 			private var cameraSupported:Boolean = true;
 			
-			protected function initialise():void
+			protected function onCreationComplete():void
 			{
 				if(CameraUI.isSupported)
 				{

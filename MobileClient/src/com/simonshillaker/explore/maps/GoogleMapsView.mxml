@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <core:VerticalCenteredViewWithBackButton xmlns:core="com.simonshillaker.explore.core.*"
 		xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" title="Embedded Google Maps"
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="{resourceManager.getString('explore_air_mobile', 'google_maps_title')}"
 		xmlns:maps="com.google.maps.*" >
 	
 	<fx:Script>
