@@ -1,6 +1,4 @@
 FEATURES TODO
-	Local Database Integration
-
 	Include NetworkStatus API for using local chat
 	Handle Hide behaviour especially on GPS
 	Rename initialise methods
