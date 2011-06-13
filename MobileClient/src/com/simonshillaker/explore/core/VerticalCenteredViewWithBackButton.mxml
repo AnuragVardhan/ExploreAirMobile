@@ -4,7 +4,8 @@
 		title="">
 	
 	<s:navigationContent>
-		<s:Button id="backButton" label="Back" 
+		<s:Button id="backButton" 
+				  label="{resourceManager.getString('explore_air_mobile','back_label')}"
 				  visible="{navigator.length > 1}" includeInLayout="{navigator.length > 1}" 
 				  click="navigator.popView()"/>
 	</s:navigationContent>

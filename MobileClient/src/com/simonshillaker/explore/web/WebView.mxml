@@ -7,6 +7,12 @@
 	<fx:Script>
 		<![CDATA[
 			import flash.net.navigateToURL;
+			
+			private function goToNativeWebBrowser():void {
+				var url:String = resourceManager.getString('explore_air_mobile', 'web_default_url');
+				
+				navigateToURL(new URLRequest(url));
+			}
 		]]>
 	</fx:Script>
 	
@@ -19,7 +25,7 @@
 	<s:Button label="{resourceManager.getString('explore_air_mobile', 'native_browser_title')}" 
 			  id="nativeBrowserButton" 
 			  width="100%" 
-			  click="navigateToURL(new URLRequest('http://www.google.com'))" />
+			  click="goToNativeWebBrowser()" />
 
 </core:VerticalCenteredViewWithBackButton>
 	

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <core:VerticalCenteredViewWithBackButton xmlns:core="com.simonshillaker.explore.core.*"
-		xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" 
-		title="{resourceManager.getString('explore_air_mobile', 'device_camera_title')}" 
-		creationComplete="onCreationComplete()">
+										 xmlns:fx="http://ns.adobe.com/mxml/2009"
+										 xmlns:s="library://ns.adobe.com/flex/spark"
+										 creationComplete="onCreationComplete()"
+										 title="{resourceManager.getString('explore_air_mobile', 'device_camera_title')}">
 	
 	<fx:Script>
 		<![CDATA[
@@ -47,11 +47,13 @@
 		]]>
 	</fx:Script>
 	
-	<s:Label text="CameraUI not supported." includeInLayout="{!cameraSupported}" visible="{!cameraSupported}"/>
+	<s:Label visible="{!cameraSupported}" includeInLayout="{!cameraSupported}"
+			 text="CameraUI not supported."/>
 	
-	<s:Button id="cameraButton" label="Take Another" includeInLayout="{cameraSupported}" visible="{cameraSupported}" click="handleCameraButtonClick(event)"/>
+	<s:Button id="cameraButton" visible="{cameraSupported}" label="Take Another"
+			  click="handleCameraButtonClick(event)" includeInLayout="{cameraSupported}"/>
 	
-	<s:Label id="imageUrl" text="" />
-	<s:Image id="image" width="100%" />
+	<s:Label id="imageUrl" text=""/>
+	<s:Image id="image" width="100%"/>
 
 </core:VerticalCenteredViewWithBackButton>

@@ -1,77 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<core:VerticalCenteredViewWithBackButton xmlns:core="com.simonshillaker.explore.core.*"
-		xmlns:fx="http://ns.adobe.com/mxml/2009"
-		xmlns:s="library://ns.adobe.com/flex/spark"
-		creationComplete="initialise(event)" 
-		remove="removeHandler(event)" resize="fitViewToScreen()"
-		title="{resourceManager.getString('explore_air_mobile', 'internal_browser_title')}">
-	
+<s:View xmlns:core="com.simonshillaker.explore.core.*"
+										 xmlns:fx="http://ns.adobe.com/mxml/2009"
+										 xmlns:s="library://ns.adobe.com/flex/spark"
+										 creationComplete="onCreationComplete(event)"
+										 tabBarVisible="false"
+										 remove="onRemove()"
+										 title="{resourceManager.getString('explore_air_mobile', 'internal_browser_title')}">
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
+			import mx.resources.IResourceManager;
+			import mx.resources.ResourceManager;
 			
 			import spark.events.ViewNavigatorEvent;
 			
+			[Bindable]
 			public var webView:StageWebView;
 			
-			private function fitViewToScreen():void{
-				
-				if(webView)
-				{
-					webView.viewPort = new Rectangle(0, stage.height - height, width, height);
+			[Bindable]
+			private var isLoading:Boolean = true;
+			
+			[Bindable]
+			private var isError:Boolean = false;
+			
+			private function onCreationComplete(event:FlexEvent):void 
+			{
+				if(!StageWebView.isSupported) {
+					errorLabel.text = resourceManager.getString('explore_air_mobile','internal_browser_not_supported');
+					isError = true;
+					isLoading = false;
+					urlInput.enabled = false;
+					goToURLButton.enabled = false;
+					historyBackButton.enabled = false;
+					historyForwardButton.enabled = false;
 				}
-			}
-			
-			protected function removeHandler(event:FlexEvent):void
-			{
-				webView.dispose();
-			}
-			
-			private function initialise(event:FlexEvent):void 
-			{
+				
 				webView = new StageWebView();
-				
-				fitViewToScreen();
-				
-				webView.stage = stage;
-				
-				webView.loadURL("http://www.bbc.co.uk/news");
-				
+				webView.loadURL(resourceManager.getString('explore_air_mobile', 'web_default_url'));
 				webView.addEventListener(ErrorEvent.ERROR, handleWebError);
-				
 				webView.addEventListener(Event.COMPLETE, handleWebSuccess);
 			}
 			
 			private function handleWebError(event:ErrorEvent):void
 			{
-				errorLabel.visible = true;
+				isLoading = false
+				isError = true;
 			}
 			
 			private function handleWebSuccess(event:Event):void
 			{
-				errorLabel.visible = false;
+				webView.stage = stage;
+				webView.viewPort = new Rectangle(0, 
+					stage.height - height + 40, 
+					width, 
+					height - 40);
+				isLoading = false;
+				isError = false;
 			}
 			
 			protected function goToUrl():void
 			{
 				if(webView)
 				{
-					errorLabel.visible = false;
+					webView.stop();
+					webView.stage = null;
+					isError = false;
+					isLoading = true;
 					webView.loadURL(urlInput.text);
 				}
+			}
+			
+			private function historyBack():void
+			{
+				if(webView && webView.isHistoryBackEnabled)
+				{
+					isLoading = true;
+					isError = false;
+					webView.historyBack();
+				}
+			}
+			
+			private function historyForward():void
+			{
+				if(webView && webView.isHistoryForwardEnabled)
+				{
+					isLoading = true;
+					isError = false;
+					webView.historyForward();
+				}
+			}
+			
+			private function exit():void
+			{
+				navigator.popView();
+			}
+			
+			private function onRemove():void
+			{
+				webView.dispose();
+				isLoading = false;
+				isError = false;
+			}
+			
+			override protected function get resourceManager():IResourceManager
+			{
+				return ResourceManager.getInstance();
 			}
 			
 		]]>
 	</fx:Script>
 	
-	<core:titleContent>
-		<s:Group width="100%" height="100%">
-			<s:TextInput id="urlInput" left="2" right="{5 + goToURLButton.width}"
-						 prompt="Enter a URL" enter="goToUrl()"/>
-			<s:Button id="goToURLButton" right="2" label="Go"
-					  click="goToUrl()"/>
-		</s:Group>
-	</core:titleContent>
+	<s:navigationContent>
+		<s:Button id="backButton" 
+				  label="{resourceManager.getString('explore_air_mobile','back_label')}"
+				  visible="{navigator.length > 1}" includeInLayout="{navigator.length > 1}" 
+				  click="exit()"/>
+	</s:navigationContent>
 	
-	<s:Label id="errorLabel" visible="false" text="Invalid URL"/>
-</core:VerticalCenteredViewWithBackButton>
+	<s:HGroup id="navBar" left="0" right="0" top="0" height="40">
+		<s:Button id="historyBackButton"
+				  width="40"
+				  height="40"				
+				  label="{resourceManager.getString('explore_air_mobile', 'nav_back_label')}" 
+				  click="historyBack()" />
+		
+		<s:Button id="historyForwardButton" 
+				  width="40"
+				  height="40"
+				  label="{resourceManager.getString('explore_air_mobile', 'nav_forward_label')}" 
+				  click="historyForward()" />
+		
+		<s:TextInput id="urlInput" 
+					 enter="goToUrl()" 
+					 prompt="Enter a URL" 
+					 height="40" 
+					 width="100%"/>
+		
+		<s:Button id="goToURLButton" 
+				  width="60" 
+				  height="40" 
+				  label="Go" 
+				  click="goToUrl()"/>
+	
+	</s:HGroup>
+	
+	<s:BusyIndicator visible="{isLoading}" horizontalCenter="0" verticalCenter="0"/>
+	
+	<s:Label id="errorLabel" visible="{isError}" 
+			 horizontalCenter="0" 
+			 text="{resourceManager.getString('explore_air_mobile','internal_browser_invalid_url')}"
+			 verticalCenter="0"/>
+	
+</s:View>

@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <core:VerticalCenteredViewWithBackButton xmlns:core="com.simonshillaker.explore.core.*"
-										 xmlns:fx="http://ns.adobe.com/mxml/2009" 
-										 xmlns:s="library://ns.adobe.com/flex/spark" 
+										 xmlns:fx="http://ns.adobe.com/mxml/2009"
+										 xmlns:s="library://ns.adobe.com/flex/spark"
 										 title="{resourceManager.getString('explore_air_mobile', 'camera_title')}">
 	
-	<s:Button id="deviceCameraButton" 
-			  label="{resourceManager.getString('explore_air_mobile', 'device_camera_title')}" 
-			  width="100%" 
-			  click="navigator.pushView(DeviceCameraView)" />
+	<s:Button id="deviceCameraButton" width="100%"
+			  label="{resourceManager.getString('explore_air_mobile', 'device_camera_title')}"
+			  click="navigator.pushView(DeviceCameraView)"/>
 	
-	<s:Button id="embeddedCamera" 
-			  label="{resourceManager.getString('explore_air_mobile', 'embedded_camera_title')}" 
-			  width="100%" 
-			  click="navigator.pushView(EmbeddedCameraView)" />
+	<s:Button id="embeddedCamera" width="100%"
+			  label="{resourceManager.getString('explore_air_mobile', 'embedded_camera_title')}"
+			  click="navigator.pushView(EmbeddedCameraView)"/>
 	
 </core:VerticalCenteredViewWithBackButton>
