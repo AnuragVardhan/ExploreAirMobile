@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<core:VerticalCenteredViewWithBackButton xmlns:core="com.simonshillaker.explore.core.*"
+		xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="Maps">
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.net.navigateToURL;
+			protected function googleMapsButton_clickHandler(event:MouseEvent):void
+			{
+				navigator.pushView(GoogleMapsView);
+			}
+			
+			protected function externalMapsButton_clickHandler(event:MouseEvent):void
+			{
+				navigateToURL(new URLRequest("http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=appold+street+london&aq=&sll=37.0625,-95.677068&sspn=40.27343,78.662109&ie=UTF8&hq=&hnear=Appold+St,+London,+United+Kingdom&z=16"));
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Button id="googleMapsButton" label="Google Maps Integration" click="googleMapsButton_clickHandler(event)" />
+	<s:Button id="externalMapsButton" label="External Maps" click="externalMapsButton_clickHandler(event)" />
+	
+</core:VerticalCenteredViewWithBackButton>

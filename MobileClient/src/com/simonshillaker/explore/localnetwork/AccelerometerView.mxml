@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<core:VerticalCenteredViewWithBackButton xmlns:core="com.simonshillaker.explore.core.*"
+		xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="Accelerometer Test" 
+		creationComplete="initialise()">
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.sensors.Accelerometer;
+			
+			import com.simonshillaker.network.NetworkConnector;
+			
+			private var networkConnector:NetworkConnector = new NetworkConnector();
+			
+			private var accelerometer:Accelerometer = new Accelerometer();
+			
+			private function initialise():void
+			{
+				accelerometer.addEventListener(AccelerometerEvent.UPDATE, onAccelerometerChange);
+			}
+			
+			private function onAccelerometerChange(event:AccelerometerEvent):void
+			{
+				networkConnector.sendMessage("" + Math.round(event.accelerationY*(-90)));
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Label text="Move phone to move arrow on listening desktops." />
+	
+</core:VerticalCenteredViewWithBackButton>
