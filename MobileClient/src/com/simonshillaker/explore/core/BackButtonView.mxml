@@ -10,8 +10,4 @@
 				  click="navigator.popView()"/>
 	</s:navigationContent>
 	
-	<s:layout>
-		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
-	</s:layout>
-	
 </s:View>

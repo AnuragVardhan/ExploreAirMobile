@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<core:VerticalCenteredViewWithBackButton xmlns:core="com.simonshillaker.explore.core.*"
+<core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
 		xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		title="{resourceManager.getString('explore_air_mobile', 'local_db_title')}"
 		creationComplete="onCreationComplete(event)">
 
+	<core:layout>
+		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+	</core:layout>
+	
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
@@ -79,4 +83,4 @@
 		<s:Button label="Clear All Data" click="handleClearAllUsers()" />
 	</s:VGroup>
 	
-</core:VerticalCenteredViewWithBackButton>
+</core:BackButtonView>

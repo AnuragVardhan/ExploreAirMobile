@@ -17,13 +17,13 @@
 			
 			protected function applicationCompleteHandler(event:FlexEvent):void
 			{
-				stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;		
-				stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGE, handleStageOrientation);				
+//				stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;		
+				stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGE, handleOrientationChange);
 			}
 			
-			protected function handleStageOrientation(event:StageOrientationEvent):void
+			protected function handleOrientationChange(event:StageOrientationEvent):void
 			{
-				//Do nothing. Don't allow screen tilting by default. Other views can override this.
+				event.stopPropagation();
 			}
 			
 		]]>
@@ -32,11 +32,11 @@
 	<fx:Style source="ExploreAirMobileStyles.css" />
 	
 	<s:ViewNavigator label="{resourceManager.getString('explore_air_mobile', 'home_title')}" 
-					 id="homeTab" firstView="{HomeView}" width="100%" height="100%" 
+					 id="homeTab" firstView="{HomeView}" width="100%" height="100%"
 						 hide="homeTab.popToFirstView()"/>
 		
 	<s:ViewNavigator label="{resourceManager.getString('explore_air_mobile', 'phone_integration_title')}" 
-					 id="integrationTab" firstView="{PhoneIntegrationView}" width="100%" height="100%"
+					 id="integrationTab" firstView="{PhoneIntegrationView}" width="100%" height="100%" 
 						 hide="integrationTab.popToFirstView()"/>
 		
 </s:TabbedViewNavigatorApplication>

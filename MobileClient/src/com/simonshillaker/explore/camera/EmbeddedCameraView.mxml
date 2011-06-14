@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<core:VerticalCenteredViewWithBackButton xmlns:core="com.simonshillaker.explore.core.*"
+<core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
 										 xmlns:fx="http://ns.adobe.com/mxml/2009"
 										 xmlns:s="library://ns.adobe.com/flex/spark"
 										 xmlns:mx="library://ns.adobe.com/flex/mx"
 										 creationComplete="onCreationComplete()"
 										 title="{resourceManager.getString('explore_air_mobile', 'embedded_camera_title')}">
 
+	<core:layout>
+		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+	</core:layout>
+	
 	<fx:Script>
 		<![CDATA[
 			
@@ -43,4 +47,4 @@
 		<mx:UIComponent id="videoHolder" visible="{cameraSupported}" width="100%" height="100%"
 						includeInLayout="{cameraSupported}"/>
 		
-</core:VerticalCenteredViewWithBackButton>
+</core:BackButtonView>

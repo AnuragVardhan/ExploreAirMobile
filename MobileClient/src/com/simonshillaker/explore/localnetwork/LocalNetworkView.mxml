@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<core:VerticalCenteredViewWithBackButton xmlns:core="com.simonshillaker.explore.core.*"
+<core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
 		xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		title="{resourceManager.getString('explore_air_mobile', 'local_network_title')}" >
+	
+	<core:layout>
+		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+	</core:layout>
 	
 	<s:Button id="localChatButton" 
 			  label="Local Network Chat" 
@@ -14,4 +18,4 @@
 			  width="100%" 
 			  click="navigator.pushView(AccelerometerView)" />
 
-</core:VerticalCenteredViewWithBackButton>
+</core:BackButtonView>

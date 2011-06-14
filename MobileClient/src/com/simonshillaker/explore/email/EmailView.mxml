@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		title="{resourceManager.getString('explore_air_mobile', 'email_title')}">
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center"/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.net.navigateToURL;
+			private static const LEFT_COL_WIDTH:int = 60;
+			private static const ROW_HEIGHT:int = 40;
+			
+			[Bindable]
+			private var isError:Boolean;
+			
+			private function sendMailToRequest():void
+			{
+				isError = false;
+				
+				if(toInput)
+				{
+					errorLabel.text = "Enter a recipient";
+					isError = true;
+					return;
+				}
+				
+				var mailToRequest:String = "mailto:";
+				
+				mailToRequest += toInput.text;
+				
+				mailToRequest += "?body=" + bodyInput.text;
+				
+				if(subjectInput.text)
+				{
+					mailToRequest += "&subject=" + subjectInput.text;
+				}
+				if(ccInput.text)
+				{
+					mailToRequest += "&cc=" + ccInput.text;
+				}
+				
+				navigateToURL(new URLRequest(mailToRequest));
+			}
+	
+			]]>
+	</fx:Script>
+	
+	<s:Label id="errorLabel" styleName="error" verticalAlign="middle" visible="{isError}" includeInLayout="{isError}" width="100%"/>
+	
+	<s:HGroup width="100%" height="{ROW_HEIGHT}">
+		<s:Label width="{LEFT_COL_WIDTH}" height="{ROW_HEIGHT}" text="To:"/>
+		<s:TextInput id="toInput" width="100%" height="{ROW_HEIGHT}"/> 
+	</s:HGroup>
+
+	<s:HGroup width="100%" height="{ROW_HEIGHT}">
+		<s:Label width="{LEFT_COL_WIDTH}" height="{ROW_HEIGHT}" text="Cc:"/>
+		<s:TextInput id="ccInput" width="100%" height="{ROW_HEIGHT}"/>
+	</s:HGroup>
+	
+	<s:HGroup width="100%">
+		<s:Label left="0" width="{LEFT_COL_WIDTH}" height="{ROW_HEIGHT}" text="Subject:"/>
+		<s:TextInput id="subjectInput" width="100%" height="{ROW_HEIGHT}"/>
+	</s:HGroup>
+
+	<s:Label height="{ROW_HEIGHT}" text="Body:" width="100%"/>
+	
+	<s:TextArea id="bodyInput" height="100%" width="100%"/>
+	
+	<s:Button height="{ROW_HEIGHT}" id="sendButton" label="Send" click="sendMailToRequest()" />
+	
+</s:View>
