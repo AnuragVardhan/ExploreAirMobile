@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:TabbedViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
 								  xmlns:s="library://ns.adobe.com/flex/spark"
-								  applicationComplete="applicationCompleteHandler(event)">
+								  applicationComplete="applicationCompleteHandler(event)"
+								  >
 	
 	<fx:Metadata>
 		[ResourceBundle("explore_air_mobile")]
@@ -9,14 +10,20 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import mx.events.FlexEvent;
-			
 			import com.simonshillaker.explore.home.HomeView;
 			import com.simonshillaker.explore.phoneintegration.PhoneIntegrationView;
 			
+			import mx.events.FlexEvent;
+			
 			protected function applicationCompleteHandler(event:FlexEvent):void
 			{
-				stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;				
+				stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;		
+				stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGE, handleStageOrientation);				
+			}
+			
+			protected function handleStageOrientation(event:StageOrientationEvent):void
+			{
+				//Do nothing. Don't allow screen tilting by default. Other views can override this.
 			}
 			
 		]]>

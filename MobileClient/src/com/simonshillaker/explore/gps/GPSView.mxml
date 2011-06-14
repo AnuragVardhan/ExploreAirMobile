@@ -2,7 +2,8 @@
 <core:VerticalCenteredViewWithBackButton xmlns:core="com.simonshillaker.explore.core.*"
 		xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
-		title="{resourceManager.getString('explore_air_mobile', 'gps_title')}">
+		title="{resourceManager.getString('explore_air_mobile', 'gps_title')}"
+		remove="onRemove()">
 
 	<fx:Script>
 		<![CDATA[
@@ -80,11 +81,12 @@
 
 			protected function handleGeolocationUpdate(event:GeolocationEvent):void
 			{
-					latitude = event.latitude;
-					longitude = event.longitude;
-					heading = event.heading;
-					altitude = event.altitude;
-					speed= event.speed;
+				latitude = event.latitude;
+				longitude = event.longitude;
+				heading = event.heading;
+				altitude = event.altitude;
+				speed= event.speed;
+				
 				if(isMapReady)
 				{
 					map.setCenter(new LatLng(latitude, longitude), 14, MapType.NORMAL_MAP_TYPE);
@@ -123,6 +125,19 @@
 				findMeButton.includeInLayout = false;
 
 				initialise();
+			}
+			
+			protected function onRemove():void
+			{
+				if(map)
+				{
+					map.unload();
+				}
+				if(geolocation)
+				{
+					geolocation = null;
+					geolocation.removeEventListener(GeolocationEvent.UPDATE, handleGeolocationUpdate);
+				}
 			}
 			
 		]]>
