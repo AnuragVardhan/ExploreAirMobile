@@ -3,72 +3,93 @@
 		xmlns:s="library://ns.adobe.com/flex/spark"
 		title="{resourceManager.getString('explore_air_mobile', 'email_title')}">
 	
-	<s:layout>
-		<s:VerticalLayout horizontalAlign="center"/>
-	</s:layout>
-	
 	<fx:Script>
 		<![CDATA[
-			import flash.net.navigateToURL;
+			import mx.resources.IResourceManager;
+			import mx.resources.ResourceManager;
+			import mx.utils.StringUtil;
+			
 			private static const LEFT_COL_WIDTH:int = 60;
-			private static const ROW_HEIGHT:int = 40;
 			
 			[Bindable]
 			private var isError:Boolean;
 			
-			private function sendMailToRequest():void
+			private var mailToRequest:String = "mailto:{0}?cc={1}&subject={2}&body={3}";
+			
+			private function sendMailtoRequest():void
 			{
-				isError = false;
-				
-				if(toInput)
+				if(!toInput.text)
 				{
-					errorLabel.text = "Enter a recipient";
+					errorLabel.text = resourceManager.getString('explore_air_mobile', 'email_no_recipient_message');
 					isError = true;
 					return;
 				}
+
+				isError = false;
 				
-				var mailToRequest:String = "mailto:";
+				var request:String = StringUtil.substitute(mailToRequest,
+					toInput.text,
+					ccInput.text,
+					subjectInput.text,
+					buildMailtoBody(bodyInput.text));
 				
-				mailToRequest += toInput.text;
+				navigateToURL(new URLRequest(request));
+			}
+			
+			private function buildMailtoBody(bodyInputText:String):String
+			{
+				var tokens:Array = bodyInputText.split("\r");
 				
-				mailToRequest += "?body=" + bodyInput.text;
+				var mailtoBody:String = "";
 				
-				if(subjectInput.text)
+				for each(var token:String in tokens)
 				{
-					mailToRequest += "&subject=" + subjectInput.text;
-				}
-				if(ccInput.text)
-				{
-					mailToRequest += "&cc=" + ccInput.text;
+					mailtoBody += token + "%0A";
 				}
 				
-				navigateToURL(new URLRequest(mailToRequest));
+				return mailtoBody;
 			}
 	
+			override protected function get resourceManager():IResourceManager
+			{
+				return ResourceManager.getInstance();
+			}
 			]]>
 	</fx:Script>
 	
-	<s:Label id="errorLabel" styleName="error" verticalAlign="middle" visible="{isError}" includeInLayout="{isError}" width="100%"/>
-	
-	<s:HGroup width="100%" height="{ROW_HEIGHT}">
-		<s:Label width="{LEFT_COL_WIDTH}" height="{ROW_HEIGHT}" text="To:"/>
-		<s:TextInput id="toInput" width="100%" height="{ROW_HEIGHT}"/> 
-	</s:HGroup>
-
-	<s:HGroup width="100%" height="{ROW_HEIGHT}">
-		<s:Label width="{LEFT_COL_WIDTH}" height="{ROW_HEIGHT}" text="Cc:"/>
-		<s:TextInput id="ccInput" width="100%" height="{ROW_HEIGHT}"/>
-	</s:HGroup>
-	
-	<s:HGroup width="100%">
-		<s:Label left="0" width="{LEFT_COL_WIDTH}" height="{ROW_HEIGHT}" text="Subject:"/>
-		<s:TextInput id="subjectInput" width="100%" height="{ROW_HEIGHT}"/>
-	</s:HGroup>
-
-	<s:Label height="{ROW_HEIGHT}" text="Body:" width="100%"/>
-	
-	<s:TextArea id="bodyInput" height="100%" width="100%"/>
-	
-	<s:Button height="{ROW_HEIGHT}" id="sendButton" label="Send" click="sendMailToRequest()" />
+	<s:Scroller width="100%" height="100%">
+		
+		<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
+			
+			<s:Label id="errorLabel" styleName="error" visible="{isError}" includeInLayout="{isError}"/>
+			
+			<s:HGroup width="100%" verticalAlign="middle">
+				
+				<s:Label text="To:" width="{LEFT_COL_WIDTH}" />
+				<s:TextInput id="toInput" width="100%" />
+				
+			</s:HGroup>
+		
+			<s:HGroup width="100%"  verticalAlign="middle">
+				
+				<s:Label text="Cc:" width="{LEFT_COL_WIDTH}" />
+				<s:TextInput id="ccInput" width="100%" />
+				
+			</s:HGroup>
+			
+			<s:HGroup width="100%" verticalAlign="middle">
+				
+				<s:Label text="Subject:" width="{LEFT_COL_WIDTH}" />
+				<s:TextInput id="subjectInput" width="100%"/>
+				
+			</s:HGroup>
+		
+			<s:TextArea id="bodyInput" prompt="Body..." height="100%" width="100%" minHeight="90" />
+			
+			<s:Button id="sendButton" label="Send" width="100%" click="sendMailtoRequest()"/>
+			
+		</s:VGroup>
+		
+	</s:Scroller>
 	
 </s:View>

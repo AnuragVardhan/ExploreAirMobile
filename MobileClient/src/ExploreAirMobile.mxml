@@ -17,13 +17,6 @@
 			
 			protected function applicationCompleteHandler(event:FlexEvent):void
 			{
-//				stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;		
-				stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGE, handleOrientationChange);
-			}
-			
-			protected function handleOrientationChange(event:StageOrientationEvent):void
-			{
-				event.stopPropagation();
 			}
 			
 		]]>
