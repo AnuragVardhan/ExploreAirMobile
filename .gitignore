@@ -2,6 +2,7 @@
 .flexProperties
 .project
 .settings/
+bin/
 /bin-debug
 bin-debug
 bin-debug/*
