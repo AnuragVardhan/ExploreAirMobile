@@ -30,8 +30,8 @@
 	</s:Rect>
 	
 	<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
-		<s:Label id="usernameLabel" text="{user.username}" />
-		<s:Label id="nameLabel" text="{user.name}" />
-		<s:Label id="emailLabel" text="{user.email}" />
+		<s:Label text="{user.userId}" />
+		<s:Label text="{user.username}" />
+		<s:Label text="{user.name}" />
 	</s:VGroup>
 </s:ItemRenderer>

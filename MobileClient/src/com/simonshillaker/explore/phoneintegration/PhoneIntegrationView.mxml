@@ -4,10 +4,6 @@
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		title="{resourceManager.getString('explore_air_mobile', 'phone_integration_title')}">
 	
-	<core:layout>
-		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
-	</core:layout>
-	
 	<fx:Script>
 		<![CDATA[
 			import com.simonshillaker.explore.camera.CameraView;
@@ -20,51 +16,62 @@
 			
 			protected function phoneButton_clickHandler(event:MouseEvent):void
 			{
-				navigateToURL(new URLRequest('tel:123456789'));
+				navigateToURL(new URLRequest('tel:000111222'));
 			}
 			
 			protected function smsButton_clickHandler(event:MouseEvent):void
 			{
-				navigateToURL(new URLRequest('sms:1234567890'));
+				navigateToURL(new URLRequest('sms:000111222'));
 			}
 			
 		]]>
 	</fx:Script>
 	
-	<s:Button id="localDbButton" 
-			  label="Local DB"
-			  width="100%" 
-			  click="navigator.pushView(LocalDatabaseView)" />
-	<s:Button id="localNetworkButton" 
-			  label="Local Network" 
-			  width="100%" 
-			  click="navigator.pushView(LocalNetworkView)" />
-	<s:Button id="gpsButton" 
-			  label="GPS" 
-			  width="100%" 
-			  click="navigator.pushView(GPSView)" />
-	<s:Button id="webButton" 
-			  label="Web" 
-			  width="100%" 
-			  click="navigator.pushView(WebView)" />
-	<s:Button id="mapsButton" 
-			  label="Maps" 
-			  width="100%" 
-			  click="navigator.pushView(MapsView)" />
-	<s:Button id="cameraButton" 
-			  label="Camera" width="100%" 
-			  click="navigator.pushView(CameraView)" />
-	<s:Button id="emailButton" 
-			  label="Email" 
-			  width="100%" 
-			  click="navigator.pushView(EmailView)" />
-	<s:Button id="phoneButton" 
-			  label="Phone" 
-			  width="100%" 
-			  click="phoneButton_clickHandler(event)"/>
-	<s:Button id="smsButton" 
-			  label="SMS" 
-			  width="100%"
-			  click="smsButton_clickHandler(event)"/>
+	<s:Scroller width="100%" height="100%" >
+		
+		<s:VGroup paddingBottom="5" paddingTop="5" paddingLeft="5" paddingRight="5" >
+			
+			<s:Button label="{resourceManager.getString('explore_air_mobile', 'local_db_title')}"
+			  		width="100%" 
+			  		click="navigator.pushView(LocalDatabaseView)" />
+			
+			<s:Button label="{resourceManager.getString('explore_air_mobile', 'local_network_title')}"
+			  		width="100%" 
+			  		click="navigator.pushView(LocalNetworkView)" />
+	
+			<s:Button label="{resourceManager.getString('explore_air_mobile', 'gps_title')}"
+			  		width="100%" 
+			  		click="navigator.pushView(GPSView)" />
+			
+			<s:Button label="{resourceManager.getString('explore_air_mobile', 'web_title')}"
+			  		width="100%" 
+			  		click="navigator.pushView(WebView)" />
+			
+			<s:Button label="{resourceManager.getString('explore_air_mobile', 'maps_title')}"
+			  		width="100%" 
+			  		click="navigator.pushView(MapsView)" />
+		
+			<s:Button label="{resourceManager.getString('explore_air_mobile', 'camera_title')}"
+			  		width="100%" 
+			  		click="navigator.pushView(CameraView)" />
+			
+			<s:Button label="{resourceManager.getString('explore_air_mobile', 'email_title')}"
+			  		width="100%" 
+			  		click="navigator.pushView(EmailView)" />
+			
+			<s:Button id="phoneButton" 
+			  		label="Phone" 
+			  		width="100%" 
+			  		click="phoneButton_clickHandler(event)"/>
+			
+			<s:Button id="smsButton" 
+			  		label="SMS" 
+			  		width="100%"
+			  		click="smsButton_clickHandler(event)"/>
 
+		</s:VGroup>
+		
+	</s:Scroller>
+	
 </core:BackButtonView>
+	

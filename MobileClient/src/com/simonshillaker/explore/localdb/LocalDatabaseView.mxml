@@ -1,32 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
-		xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" 
-		title="{resourceManager.getString('explore_air_mobile', 'local_db_title')}"
-		creationComplete="onCreationComplete(event)">
-
-	<core:layout>
-		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
-	</core:layout>
+					 xmlns:fx="http://ns.adobe.com/mxml/2009"
+					 xmlns:s="library://ns.adobe.com/flex/spark"
+					 title="{resourceManager.getString('explore_air_mobile', 'local_db_title')}"
+					 remove="onRemove()">
 	
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
+			import mx.rpc.events.FaultEvent;
+			
+			private static const LEFT_COL_WIDTH:int = 80;
 			
 			[Bindable]
-			private var db:LocalDatabaseService = new LocalDatabaseService();
-			
-			private function onCreationComplete(event:FlexEvent):void
-			{
-				db.addEventListener(LocalDatabaseService.DB_ERROR, handleDbError);
-			}
-			
-			private function handleDbError(event:SQLErrorEvent):void
-			{
-				mainViewGroup.enabled = false;
-				
-				errorLabel.text = event.error.details;
-			}
+			private var db:UserDao = new UserDao();
 			
 			private function handleAddUser(event:MouseEvent):void
 			{
@@ -34,7 +21,6 @@
 				
 				newUser.name = nameInput.text;
 				newUser.username = userNameInput.text;
-				newUser.email = emailInput.text;
 				
 				db.createUser(newUser);
 				
@@ -45,42 +31,71 @@
 			{
 				nameInput.text = "";
 				userNameInput.text = "";
-				emailInput.text = "";
 			}
 			
 			private function handleClearAllUsers():void
 			{
 				db.deleteAllUsers();
 			}
-	
+			
+			private function onRemove():void
+			{
+				db.dispose();
+			}
 			
 		]]>
 	</fx:Script>
 	
-	<s:BusyIndicator visible="{!db.initialised}" includeInLayout="{!db.initialised}" />
+	<s:BusyIndicator visible="{!db.initialised}" horizontalCenter="0"
+					 includeInLayout="{!db.initialised}" verticalCenter="0"/>
 
-	<s:Label id="errorLabel" width="100%"/>
+	<s:Scroller width="100%" height="100%">
 
-	<s:VGroup width="100%" height="100%" 
-			  paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" 
-			  id="mainViewGroup" visible="{db.initialised}" horizontalAlign="center">
-		<s:HGroup width="100%">
-			<s:Label text="Username: "/>
-			<s:TextInput id="userNameInput" width="100%"/>
-		</s:HGroup>
-		<s:HGroup width="100%">
-			<s:Label text="Name:" />			
-			<s:TextInput id="nameInput" width="100%"/>
-		</s:HGroup>
-		<s:HGroup width="100%">
-			<s:Label text="Email:" />
-			<s:TextInput id="emailInput" width="100%"/>
-		</s:HGroup>
-		<s:Button label="Add User" id="addUserButton" click="handleAddUser(event)"/>
+		<s:VGroup id="mainViewGroup" 
+				  visible="{db.initialised}" 
+				  width="100%" height="100%"
+				  horizontalAlign="center" 
+				  paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
 		
-		<s:List dataProvider="{db.users}" width="100%" height="100%" itemRenderer="com.simonshillaker.explore.localdb.UserItemRenderer"/>
+			<s:Label id="errorLabel" 
+					 width="100%" 
+					 visible="{db.errorText.length > 0}" 
+					 includeInLayout="{db.errorText.length > 0}"
+					 text = "{db.errorText}"
+					 styleName="error"/>
 		
-		<s:Button label="Clear All Data" click="handleClearAllUsers()" />
-	</s:VGroup>
+			<s:HGroup width="100%" verticalAlign="middle">
+				
+				<s:Label width="{LEFT_COL_WIDTH}" 
+						 text="{resourceManager.getString('explore_air_mobile', 'local_db_username_label')}"/>
+				
+				<s:TextInput id="userNameInput" 
+							 width="100%"/>
+			
+			</s:HGroup>
+			
+			<s:HGroup width="100%" verticalAlign="middle">
+				
+				<s:Label width="{LEFT_COL_WIDTH}"		
+						 text="{resourceManager.getString('explore_air_mobile', 'local_db_name_label')}"/>
+				
+				<s:TextInput id="nameInput" width="100%"/>
+			
+			</s:HGroup>
+			
+			<s:Button width="100%" 
+					  label="{resourceManager.getString('explore_air_mobile', 'local_db_add_user_label')}"
+					  click="handleAddUser(event)"/>
+			
+			<s:List width="100%" height="100%" minHeight="80" 
+					dataProvider="{db.users}"
+					itemRenderer="com.simonshillaker.explore.localdb.UserItemRenderer"/>
+			
+			<s:Button width="100%" 
+					  label="{resourceManager.getString('explore_air_mobile', 'local_db_clear_data_label')}"
+					  click="handleClearAllUsers()"/> 
+			
+		</s:VGroup>
+	</s:Scroller>
 	
 </core:BackButtonView>
