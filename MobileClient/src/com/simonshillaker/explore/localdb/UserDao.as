@@ -58,13 +58,14 @@ package com.simonshillaker.explore.localdb
 			createUserTableStatement.text = UserSQL.CREATE_USER_TABLE_SQL;
 			createUserTableStatement.addEventListener(SQLErrorEvent.ERROR, handleSQLError);
 			createUserTableStatement.addEventListener(SQLEvent.RESULT, handleUserTableCreated);
-			
+
 			deleteAllUsersStatement = new SQLStatement();
 			deleteAllUsersStatement.sqlConnection = sqlConnection;
 			deleteAllUsersStatement.text = UserSQL.DELETE_ALL_USERS_SQL;
 			deleteAllUsersStatement.addEventListener(SQLErrorEvent.ERROR, handleSQLError);
 			deleteAllUsersStatement.addEventListener(SQLEvent.RESULT, refreshUsers);
 
+			createUserTableStatement.execute();
 		}
 		
 		// PUBLIC METHODS
@@ -144,17 +145,14 @@ package com.simonshillaker.explore.localdb
 				return null;
 			}
 			
-			var resultArray:Array;
-			resultArray = sqlResult.data as Array;		
-			
 			var users:ArrayCollection = new ArrayCollection();
 			
-			for(var i:int = 0; i < resultArray.length; i++)
+			for(var i:int = 0; i < sqlResult.data.length; i++)
 			{
 				var user:User = new User();
-				user.userId = resultArray[i].user_id;
-				user.username = resultArray[i].username;
-				user.name = resultArray[i].name;
+				user.userId = sqlResult.data[i].user_id;
+				user.username = sqlResult.data[i].username;
+				user.name = sqlResult.data[i].name;
 				
 				users.addItem(user);
 			}
