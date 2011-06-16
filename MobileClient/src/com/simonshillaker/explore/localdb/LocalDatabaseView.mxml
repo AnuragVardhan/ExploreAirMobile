@@ -13,7 +13,7 @@
 			private static const LEFT_COL_WIDTH:int = 80;
 			
 			[Bindable]
-			private var db:UserDao = new UserDao();
+			private var userDao:UserDao = new UserDao();
 			
 			private function handleAddUser(event:MouseEvent):void
 			{
@@ -22,7 +22,7 @@
 				newUser.name = nameInput.text;
 				newUser.username = userNameInput.text;
 				
-				db.createUser(newUser);
+				userDao.createUser(newUser);
 				
 				clearTextFields();
 			}
@@ -35,33 +35,33 @@
 			
 			private function handleClearAllUsers():void
 			{
-				db.deleteAllUsers();
+				userDao.deleteAllUsers();
 			}
 			
 			private function onRemove():void
 			{
-				db.dispose();
+				userDao.dispose();
 			}
 			
 		]]>
 	</fx:Script>
 	
-	<s:BusyIndicator visible="{!db.initialised}" horizontalCenter="0"
-					 includeInLayout="{!db.initialised}" verticalCenter="0"/>
+	<s:BusyIndicator visible="{!userDao.initialised}" horizontalCenter="0"
+					 includeInLayout="{!userDao.initialised}" verticalCenter="0"/>
 
 	<s:Scroller width="100%" height="100%">
 
 		<s:VGroup id="mainViewGroup" 
-				  visible="{db.initialised}" 
+				  visible="{userDao.initialised}" 
 				  width="100%" height="100%"
 				  horizontalAlign="center" 
 				  paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
 		
 			<s:Label id="errorLabel" 
 					 width="100%" 
-					 visible="{db.errorText.length > 0}" 
-					 includeInLayout="{db.errorText.length > 0}"
-					 text = "{db.errorText}"
+					 visible="{userDao.errorText.length > 0}" 
+					 includeInLayout="{userDao.errorText.length > 0}"
+					 text = "{userDao.errorText}"
 					 styleName="error"/>
 		
 			<s:HGroup width="100%" verticalAlign="middle">
@@ -88,7 +88,7 @@
 					  click="handleAddUser(event)"/>
 			
 			<s:List width="100%" height="100%" minHeight="80" 
-					dataProvider="{db.users}"
+					dataProvider="{userDao.users}"
 					itemRenderer="com.simonshillaker.explore.localdb.UserItemRenderer"/>
 			
 			<s:Button width="100%" 

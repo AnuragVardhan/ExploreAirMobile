@@ -7,10 +7,5 @@ package com.simonshillaker.explore.localdb
 		public var userId:Number;
 		public var username:String;
 		public var name:String;
-		
-		public function User()
-		{
-		}
-		
 	}
 }

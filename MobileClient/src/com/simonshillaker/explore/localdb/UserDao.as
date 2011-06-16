@@ -121,7 +121,8 @@ package com.simonshillaker.explore.localdb
 		
 		private function handleGetAllUsersResult(event:SQLEvent):void
 		{
-			users = transformResultIntoUsers(getAllUsersStatement.getResult());
+			var sqlResult:SQLResult = getAllUsersStatement.getResult();
+			users = transformResultIntoUsers(sqlResult);
 		}
 		
 		private function handleSQLError(event:SQLErrorEvent):void
@@ -147,11 +148,6 @@ package com.simonshillaker.explore.localdb
 			resultArray = sqlResult.data as Array;		
 			
 			var users:ArrayCollection = new ArrayCollection();
-			
-			if(!resultArray) 
-			{
-				return users;
-			}
 			
 			for(var i:int = 0; i < resultArray.length; i++)
 			{
