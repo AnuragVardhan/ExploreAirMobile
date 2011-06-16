@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
+		xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="{resourceManager.getString('explore_air_mobile', 'maps_title')}">
+	
+	<core:layout>
+		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+	</core:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.net.navigateToURL;
+			
+			private var WATERLOO_URL:String = 'http://maps.google.co.uk/maps?f=q&source=s_q&hl=en&q=Waterloo+Station,+York+Rd,+London+SE1,+United+Kingdom&aq=&sll=51.504722,-0.110915&sspn=0.010084,0.017831&ie=UTF8&geocode=FcbiEQMdQEL-_w&split=0&hq=&hnear=Waterloo+Station,+York+Rd,+London+SE1+7ND,+United+Kingdom&ll=51.503574,-0.114069&spn=0.010084,0.017831&z=16';
+			
+		]]>
+	</fx:Script>
+	
+	<s:Button id="googleMapsButton" 
+			  label="{resourceManager.getString('explore_air_mobile', 'google_maps_title')}" 
+			  width="100%" 
+			  click="navigator.pushView(GoogleMapsView)" />
+	
+	<s:Button id="nativeMapsButton" 
+			  label="{resourceManager.getString('explore_air_mobile', 'native_maps_title')}" 
+			  width="100%" 
+			  click="navigateToURL(new URLRequest(WATERLOO_URL))" />
+	
+</core:BackButtonView>

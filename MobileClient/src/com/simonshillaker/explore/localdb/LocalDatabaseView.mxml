@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
+		xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="{resourceManager.getString('explore_air_mobile', 'local_db_title')}"
+		creationComplete="onCreationComplete(event)">
+
+	<core:layout>
+		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+	</core:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			private var db:LocalDatabaseService = new LocalDatabaseService();
+			
+			private function onCreationComplete(event:FlexEvent):void
+			{
+				db.addEventListener(LocalDatabaseService.DB_ERROR, handleDbError);
+			}
+			
+			private function handleDbError(event:SQLErrorEvent):void
+			{
+				mainViewGroup.enabled = false;
+				
+				errorLabel.text = event.error.details;
+			}
+			
+			private function handleAddUser(event:MouseEvent):void
+			{
+				var newUser:User = new User();
+				
+				newUser.name = nameInput.text;
+				newUser.username = userNameInput.text;
+				newUser.email = emailInput.text;
+				
+				db.createUser(newUser);
+				
+				clearTextFields();
+			}
+			
+			private function clearTextFields():void
+			{
+				nameInput.text = "";
+				userNameInput.text = "";
+				emailInput.text = "";
+			}
+			
+			private function handleClearAllUsers():void
+			{
+				db.deleteAllUsers();
+			}
+	
+			
+		]]>
+	</fx:Script>
+	
+	<s:BusyIndicator visible="{!db.initialised}" includeInLayout="{!db.initialised}" />
+
+	<s:Label id="errorLabel" width="100%"/>
+
+	<s:VGroup width="100%" height="100%" 
+			  paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" 
+			  id="mainViewGroup" visible="{db.initialised}" horizontalAlign="center">
+		<s:HGroup width="100%">
+			<s:Label text="Username: "/>
+			<s:TextInput id="userNameInput" width="100%"/>
+		</s:HGroup>
+		<s:HGroup width="100%">
+			<s:Label text="Name:" />			
+			<s:TextInput id="nameInput" width="100%"/>
+		</s:HGroup>
+		<s:HGroup width="100%">
+			<s:Label text="Email:" />
+			<s:TextInput id="emailInput" width="100%"/>
+		</s:HGroup>
+		<s:Button label="Add User" id="addUserButton" click="handleAddUser(event)"/>
+		
+		<s:List dataProvider="{db.users}" width="100%" height="100%" itemRenderer="com.simonshillaker.explore.localdb.UserItemRenderer"/>
+		
+		<s:Button label="Clear All Data" click="handleClearAllUsers()" />
+	</s:VGroup>
+	
+</core:BackButtonView>

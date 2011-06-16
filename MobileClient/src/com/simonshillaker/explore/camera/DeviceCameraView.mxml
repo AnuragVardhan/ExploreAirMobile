@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
+										 xmlns:fx="http://ns.adobe.com/mxml/2009"
+										 xmlns:s="library://ns.adobe.com/flex/spark"
+										 creationComplete="onCreationComplete()"
+										 title="{resourceManager.getString('explore_air_mobile', 'device_camera_title')}">
+	
+	<core:layout>
+		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+	</core:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import spark.components.Label;
+				
+			private var cameraUI:CameraUI
+			
+			[Bindable]
+			private var cameraSupported:Boolean = true;
+			
+			protected function onCreationComplete():void
+			{
+				if(CameraUI.isSupported)
+				{
+					cameraSupported = true;
+					
+					cameraUI = new CameraUI();
+					cameraUI.addEventListener(MediaEvent.COMPLETE, handlePhotoTaken);
+					
+					cameraUI.launch(MediaType.IMAGE);
+				}
+				else 
+				{
+					cameraSupported = false;
+				}
+				
+			}
+
+			private function handleCameraButtonClick(event:MouseEvent):void
+			{
+				cameraUI.launch(MediaType.IMAGE);
+			}
+			
+			private function handlePhotoTaken(event:MediaEvent):void
+			{
+				imageUrl.text = event.data.file.url;
+				image.source = event.data.file.url;
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Label visible="{!cameraSupported}" includeInLayout="{!cameraSupported}"
+			 text="CameraUI not supported."/>
+	
+	<s:Button id="cameraButton" visible="{cameraSupported}" label="Take Another"
+			  click="handleCameraButtonClick(event)" includeInLayout="{cameraSupported}"/>
+	
+	<s:Label id="imageUrl" text=""/>
+	<s:Image id="image" width="100%"/>
+
+</core:BackButtonView>

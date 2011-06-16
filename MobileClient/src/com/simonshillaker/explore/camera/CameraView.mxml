@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
+										 xmlns:fx="http://ns.adobe.com/mxml/2009"
+										 xmlns:s="library://ns.adobe.com/flex/spark"
+										 title="{resourceManager.getString('explore_air_mobile', 'camera_title')}">
+	
+	<core:layout>
+		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+	</core:layout>
+	
+	<s:Button id="deviceCameraButton" width="100%"
+			  label="{resourceManager.getString('explore_air_mobile', 'device_camera_title')}"
+			  click="navigator.pushView(DeviceCameraView)"/>
+	
+	<s:Button id="embeddedCamera" width="100%"
+			  label="{resourceManager.getString('explore_air_mobile', 'embedded_camera_title')}"
+			  click="navigator.pushView(EmbeddedCameraView)"/>
+	
+</core:BackButtonView>
