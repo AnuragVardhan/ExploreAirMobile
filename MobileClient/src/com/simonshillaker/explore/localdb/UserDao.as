@@ -64,8 +64,6 @@ package com.simonshillaker.explore.localdb
 			deleteAllUsersStatement.text = UserSQL.DELETE_ALL_USERS_SQL;
 			deleteAllUsersStatement.addEventListener(SQLErrorEvent.ERROR, handleSQLError);
 			deleteAllUsersStatement.addEventListener(SQLEvent.RESULT, refreshUsers);
-
-			createUserTableStatement.execute();
 		}
 		
 		// PUBLIC METHODS
@@ -140,12 +138,13 @@ package com.simonshillaker.explore.localdb
 		
 		private function transformResultIntoUsers(sqlResult:SQLResult):ArrayCollection 
 		{
-			if(!sqlResult)
-			{
-				return null;
-			}
-			
+
 			var users:ArrayCollection = new ArrayCollection();
+			
+			if(!sqlResult || !sqlResult.data)
+			{
+				return users;
+			}
 			
 			for(var i:int = 0; i < sqlResult.data.length; i++)
 			{
