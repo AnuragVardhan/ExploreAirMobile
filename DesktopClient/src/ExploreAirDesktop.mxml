@@ -20,6 +20,6 @@
 	
 	<view:AccelerometerReceiver id="accelerometer" width="100%" height="100%" includeIn="accelerometer"/>
 	
-	<view:LocalNetworkChat id="localChat" width="100%" height="100%" includeIn="localChat"/>
+	<view:P2PChat id="localChat" width="100%" height="100%" includeIn="localChat"/>
 	
 </s:WindowedApplication>

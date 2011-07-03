@@ -3,34 +3,43 @@
 		xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		title="{resourceManager.getString('explore_air_mobile', 'chat_title')}"
-		creationComplete="initialise()">
+		viewActivate="initialise()">
 	
 	<core:layout>
-		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"
+						  gap="5" paddingLeft="5" paddingRight="5" 
+						  paddingTop="5" paddingBottom="5"/>
 	</core:layout>
 	
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
 			
-			import com.simonshillaker.network.NetworkConnector;
+			import com.simonshillaker.network.P2PSenderReceiver;
 			
-			private var networkConnector:NetworkConnector = new NetworkConnector();
+			private var networkConnector:P2PSenderReceiver = new P2PSenderReceiver();
+			
+			private var username:String;
 			
 			private function initialise():void
 			{
-				networkConnector.addEventListener(NetworkConnector.MESSAGE_RECEIVED, onMessageReceived);
+				username = data.username;
+				
+				networkConnector.addEventListener(P2PSenderReceiver.MESSAGE_RECEIVED, onMessageReceived);
 			}
 			
 			private function onMessageReceived(event:NetStatusEvent):void
 			{
-				receivedChatArea.text += "\nChat: " + event.info.message;
+				receivedChatArea.text += event.info.message;
 			}
 			
 			protected function messageInput_enterHandler(event:FlexEvent):void
 			{
-				networkConnector.sendMessage(messageInput.text);
-				receivedChatArea.text += "\nYou: " + messageInput.text;
+				var chatString:String = "\n" + username + ": " + messageInput.text;
+				
+				receivedChatArea.text += chatString;
+				
+				networkConnector.sendMessage(chatString);
 				
 				messageInput.text = "";
 			}
@@ -38,14 +47,12 @@
 		]]>
 	</fx:Script>
 	
-	<s:Label text="Local Network Chat Client" fontWeight="bold" />
-	
 	<s:Line xFrom="0" xTo="{this.width}" />
 	
-	<s:Label text="Received Chat:" />
+	<s:Label text="{resourceManager.getString('explore_air_mobile', 'received_chat_label')}" />
 	<s:TextArea id="receivedChatArea" editable="false" width="100%" height="100%"/>
 	
-	<s:Label text="Enter your chat: " />
+	<s:Label text="{resourceManager.getString('explore_air_mobile', 'enter_chat_label')}" />
 	
 	<s:TextInput id="messageInput" width="100%" height="50" enter="messageInput_enterHandler(event)"/>
 

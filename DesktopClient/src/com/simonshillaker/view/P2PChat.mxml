@@ -8,13 +8,13 @@
 		<![CDATA[
 			import mx.events.FlexEvent;
 			
-			import com.simonshillaker.network.NetworkConnector;
+			import com.simonshillaker.network.P2PSenderReceiver;
 			
-			private var networkConnector:NetworkConnector = new NetworkConnector();
+			private var networkConnector:P2PSenderReceiver = new P2PSenderReceiver();
 			
 			private function init():void
 			{
-				networkConnector.addEventListener(NetworkConnector.MESSAGE_RECEIVED, onMessageReceived);
+				networkConnector.addEventListener(P2PSenderReceiver.MESSAGE_RECEIVED, onMessageReceived);
 			}
 			
 			private function onMessageReceived(event:NetStatusEvent):void

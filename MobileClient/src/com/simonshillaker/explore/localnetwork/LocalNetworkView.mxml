@@ -5,13 +5,14 @@
 		title="{resourceManager.getString('explore_air_mobile', 'local_network_title')}" >
 	
 	<core:layout>
-		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"
+						  gap="5" paddingBottom="5" paddingTop="5" paddingRight="5" paddingLeft="5"/>
 	</core:layout>
 	
 	<s:Button id="localChatButton" 
 			  label="Local Network Chat" 
 			  width="100%" 
-			  click="navigator.pushView(LocalNetworkChat)" />
+			  click="navigator.pushView(P2PChatLogin)" />
 	
 	<s:Button id="accelerometerTestButton" 
 			  label="Accelerometer Test" 

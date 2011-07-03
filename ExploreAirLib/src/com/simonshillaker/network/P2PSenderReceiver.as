@@ -7,7 +7,7 @@ package com.simonshillaker.network
 	import flash.net.NetGroup;
 
 	[Event(name="messageReceived", type="flash.events.NetStatusEvent")]
-	public class NetworkConnector extends EventDispatcher
+	public class P2PSenderReceiver extends EventDispatcher
 	{
 		public static const MESSAGE_RECEIVED:String = "messageReceived";
 		
@@ -15,12 +15,10 @@ package com.simonshillaker.network
 		
 		private var group:NetGroup;
 		
-		private var isConnected:Boolean = false;
-		
 		[Bindable]
 		public var networkInfoText:String;
 		
-		public function NetworkConnector()
+		public function P2PSenderReceiver()
 		{
 			connect();
 		}
@@ -33,11 +31,14 @@ package com.simonshillaker.network
 		private function connect():void
 		{
 			connection = new NetConnection();
-			connection.addEventListener(NetStatusEvent.NET_STATUS, netStatus);
+			
+			connection.addEventListener(NetStatusEvent.NET_STATUS, 
+				handleNetConnectionStatus);
+			
 			connection.connect("rtmfp:");
 		}
 		
-		private function netStatus(event:NetStatusEvent):void
+		private function handleNetConnectionStatus(event:NetStatusEvent):void
 		{			
 			networkInfoText += event.info.code + "\n";
 			
@@ -46,10 +47,21 @@ package com.simonshillaker.network
 				case "NetConnection.Connect.Success":
 					setupGroup();
 					break;
+			}
+		}
+		
+		private function handleNetGroupStatus(event:NetStatusEvent):void
+		{			
+			networkInfoText += event.info.code + "\n";
+			
+			switch(event.info.code)
+			{
 				case "NetGroup.Connect.Success":
 					break;
+				
 				case "NetGroup.SendTo.Notify":
-					var newEvent:NetStatusEvent = new NetStatusEvent(MESSAGE_RECEIVED, false, false, event.info);
+					var newEvent:NetStatusEvent = new NetStatusEvent(
+						MESSAGE_RECEIVED, false, false, event.info);
 					dispatchEvent(newEvent);
 					break;
 				
@@ -58,15 +70,19 @@ package com.simonshillaker.network
 		
 		private function setupGroup():void
 		{
-			var groupSpec:GroupSpecifier = new GroupSpecifier("localDeviceConnections");
+			var groupSpec:GroupSpecifier = 
+				new GroupSpecifier("localDeviceConnections");
+			
 			groupSpec.routingEnabled = true;
 			groupSpec.ipMulticastMemberUpdatesEnabled = true;
 			groupSpec.addIPMulticastAddress("224.255.0.0:35353");
 			groupSpec.multicastEnabled = true;
 			
-			group = new NetGroup(connection, groupSpec.groupspecWithAuthorizations());
+			group = new NetGroup(connection, 
+				groupSpec.groupspecWithAuthorizations());
 			
-			group.addEventListener(NetStatusEvent.NET_STATUS, netStatus);
+			group.addEventListener(NetStatusEvent.NET_STATUS, 
+				handleNetGroupStatus);
 		}
 
 	}

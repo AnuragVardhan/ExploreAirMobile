@@ -13,9 +13,9 @@
 		<![CDATA[
 			import flash.sensors.Accelerometer;
 			
-			import com.simonshillaker.network.NetworkConnector;
+			import com.simonshillaker.network.P2PSenderReceiver;
 			
-			private var networkConnector:NetworkConnector = new NetworkConnector();
+			private var networkConnector:P2PSenderReceiver = new P2PSenderReceiver();
 			
 			private var accelerometer:Accelerometer = new Accelerometer();
 			
