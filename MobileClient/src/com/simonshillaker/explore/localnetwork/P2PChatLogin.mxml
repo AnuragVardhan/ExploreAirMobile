@@ -2,20 +2,25 @@
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
 	xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
-		title="{resourceManager.getString('explore_air_mobile', 'login_title')}">
+		title="{ResourceBundleUtil.LOGIN_TITLE}">
+	<fx:Script>
+		<![CDATA[
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
+		]]>
+	</fx:Script>
 	
 	<core:layout>
 		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"
 						  gap="5" paddingLeft="5" paddingRight="5"/>
 	</core:layout>
 	
-	<s:Label text="{resourceManager.getString('explore_air_mobile', 'username_prompt')}" />
+	<s:Label text="{ResourceBundleUtil.USERNAME_PROPMT}" />
 	
 	<s:TextInput id="usernameInput" 
 				 width="100%" enter="navigator.pushView(P2PChat, {username:usernameInput.text})"/>
 	
 	<s:Button id="loginButton" 
-			  label="{resourceManager.getString('explore_air_mobile', 'start_chat_label')}" 
+			  label="{ResourceBundleUtil.START_CHAT_LABEL}" 
 			  click="navigator.pushView(P2PChat, {username:usernameInput.text})"/>
 	
 </core:BackButtonView>

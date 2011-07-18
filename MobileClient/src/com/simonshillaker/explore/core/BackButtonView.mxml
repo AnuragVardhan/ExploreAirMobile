@@ -3,9 +3,29 @@
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		title="">
 	
+	<fx:Script>
+		<![CDATA[
+			
+			[Bindable]
+			protected var info:PageInfo;
+			
+			private function handleInfoButtonClick(event:MouseEvent):void
+			{
+				navigator.pushView(InfoView, info);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:actionContent>
+		<s:Button label="{ResourceBundleUtil.INFO_BUTTON_LABEL}" 
+				  visible="{info != null}" includeInLayout="{info != null}" 
+				  click="handleInfoButtonClick(event)" />
+	</s:actionContent>
+	
 	<s:navigationContent>
 		<s:Button id="backButton" 
-				  label="{resourceManager.getString('explore_air_mobile','back_label')}"
+				  label="{ResourceBundleUtil.BACK_LABEL}"
 				  visible="{navigator.length > 1}" includeInLayout="{navigator.length > 1}" 
 				  click="navigator.popView()"/>
 	</s:navigationContent>

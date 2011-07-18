@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
-		title="{resourceManager.getString('explore_air_mobile', 'home_title')}" 
+		title="{ResourceBundleUtil.HOME_TITLE}" 
 		xmlns:core="com.simonshillaker.explore.core.*">
 
 	<fx:Script>
 		<![CDATA[
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			
 			import flash.net.navigateToURL;
 			
 			
 			private function navigateToBlog():void
 			{
-				var blog_url:String = resourceManager.getString('explore_air_mobile', 'blog_url');
+				var blog_url:String = ResourceBundleUtil.BLOG_URL;
 				navigateToURL(new URLRequest(blog_url));
 			}
 			
 			private function navigateToSourceCode():void
 			{
-				var gitHubUrl:String = resourceManager.getString('explore_air_mobile', 'source_code_url');
+				var gitHubUrl:String = ResourceBundleUtil.SOURCE_CODE_UTL;
 				navigateToURL(new URLRequest(gitHubUrl));
 			}
 
 			private function navigateToTourDeFlex():void
 			{
-				var tourDeFlexUrl:String = resourceManager.getString('explore_air_mobile', 'tour_de_flex_url');		
+				var tourDeFlexUrl:String = ResourceBundleUtil.TOUR_DE_FLEX_URL;		
 				navigateToURL(new URLRequest(tourDeFlexUrl));
 			}
 			
@@ -37,23 +39,23 @@
 			  paddingBottom="5" paddingLeft="5" paddingTop="5" paddingRight="5"
 			  width="100%" height="100%">
 
-		<s:Label text="{resourceManager.getString('explore_air_mobile', 'home_welcome_text')}" 
+		<s:Label text="{ResourceBundleUtil.HOME_WELCOME_TEXT}" 
 				 width="100%"/>
 		
-		<s:Button label="{resourceManager.getString('explore_air_mobile', 'blog_button_label')}"
+		<s:Button label="{ResourceBundleUtil.BLOG_BUTTON_LABEL}"
 				  click="navigateToBlog()"
 				  width="100%"/>
 		
-		<s:Label text="{resourceManager.getString('explore_air_mobile', 'source_code_text')}" width="100%" />
+		<s:Label text="{ResourceBundleUtil.SOURCE_CODE_TEXT}" width="100%" />
 		
-		<s:Button label="{resourceManager.getString('explore_air_mobile', 'source_code_button_label')}" 
+		<s:Button label="{ResourceBundleUtil.HOME_SOURCE_CODE_BUTTON_LABEL}" 
 				  width="100%"
 				  click="navigateToSourceCode()" />
 		
-		<s:Label text="{resourceManager.getString('explore_air_mobile', 'tour_de_flex_note')}" 
+		<s:Label text="{ResourceBundleUtil.TOUR_DE_FLEX_NOTE}" 
 				 width="100%"/>
 		
-		<s:Button label="{resourceManager.getString('explore_air_mobile', 'tour_de_flex_button_label')}"
+		<s:Button label="{ResourceBundleUtil.TOUR_DE_FLEX_BUTTON_LABEL}"
 				  click="navigateToTourDeFlex()"
 				  width="100%"/>
 	</s:VGroup>

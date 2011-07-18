@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		viewActivate="onViewActivate(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.net.navigateToURL;
+			
+			import spark.events.ViewNavigatorEvent;
+			
+			[Bindable]
+			private var pageInfo:PageInfo;
+			
+			private function onViewActivate(event:ViewNavigatorEvent):void
+			{
+				pageInfo = data as PageInfo;
+				
+				if(pageInfo)
+				{
+					title = pageInfo.title + ResourceBundleUtil.INFO_SUFFIX;
+					infoText.text = pageInfo.info;
+				}
+				else 
+				{
+					infoText.text = ResourceBundleUtil.NO_INFO_AVAILABLE;				
+				}
+			}
+			
+			private function sourceCodeButtonClickHandler(event:MouseEvent):void
+			{
+				navigateToURL(new URLRequest(pageInfo.sourceUrl));
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:navigationContent>
+		<s:Button id="backButton" 
+				  label="{ResourceBundleUtil.BACK_LABEL}"
+				  click="navigator.popView()"/>
+	</s:navigationContent>
+	
+	<s:Scroller width="100%" height="100%">
+		<s:VGroup paddingBottom="5" paddingLeft="5" paddingTop="5" paddingRight="5" gap="20"
+				  verticalAlign="middle" horizontalAlign="center">
+			
+			<s:Label id="infoText" width="100%"/>
+			
+			<s:Button label="{ResourceBundleUtil.INFO_SOURCE_CODE_BUTTON_LABEL}" 
+					  width="100%" visible="{pageInfo != null}" 
+					  includeInLayout="{pageInfo != null}" click="sourceCodeButtonClickHandler(event)"/>
+		</s:VGroup>
+	</s:Scroller>
+	
+</s:View>

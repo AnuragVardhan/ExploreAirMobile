@@ -2,11 +2,14 @@
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
 					 xmlns:fx="http://ns.adobe.com/mxml/2009"
 					 xmlns:s="library://ns.adobe.com/flex/spark"
-					 creationComplete="initialise()"
-					 title="{resourceManager.getString('explore_air_mobile', 'accelerometer_title')}">
+					 creationComplete="onCreationComplete()"
+					 title="{ResourceBundleUtil.ACCELEROMETER_TITLE}" >
 	
 	<fx:Script>
 		<![CDATA[
+			import com.simonshillaker.explore.core.PageInfo;
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			import com.simonshillaker.explore.core.SourceURLs;
 			import com.simonshillaker.network.P2PSenderReceiver;
 			
 			import flash.sensors.Accelerometer;
@@ -17,8 +20,12 @@
 			
 			private var accelerometer:Accelerometer = new Accelerometer();
 			
-			private function initialise():void
+			private function onCreationComplete():void
 			{
+				info = new PageInfo(title, 
+					ResourceBundleUtil.ACCELEROMETER_INFO,
+					SourceURLs.ACCELEROMETER);
+				
 				accelerometer.addEventListener(AccelerometerEvent.UPDATE, onAccelerometerChangeX);
 				
 				stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGE, 
@@ -74,11 +81,13 @@
 	</fx:Declarations>
 	
 	<s:Label top="5" horizontalCenter="0"
-			 text="{resourceManager.getString('explore_air_mobile', 'accelerometer_explanation')}"/>
+			 text="{ResourceBundleUtil.ACCELEROMETER_EXPLANATION}"/>
 	
-	<s:HGroup top="20" horizontalCenter="0">
-		<s:RadioButton label="Rotate X" value="X" groupName="buttonGroup" selected="true"/>
-		<s:RadioButton label="Rotate Y" value="Y" groupName="buttonGroup" />
+	<s:HGroup top="30" horizontalCenter="0">
+		<s:RadioButton label="{ResourceBundleUtil.ACCELEROMETER_ROTATE_X}" 
+					   value="X" groupName="buttonGroup" selected="true"/>
+		<s:RadioButton label="{ResourceBundleUtil.ACCELEROMETER_ROTATE_Y}" 
+					   value="Y" groupName="buttonGroup" />
 	</s:HGroup>
 	
 	<s:Image id="arrow" height="150" verticalCenter="150" source="@Embed('assets/arrow.png')"

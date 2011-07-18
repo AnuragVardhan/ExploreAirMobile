@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
-										 xmlns:fx="http://ns.adobe.com/mxml/2009"
-										 xmlns:s="library://ns.adobe.com/flex/spark"
-										 title="{resourceManager.getString('explore_air_mobile', 'camera_title')}">
+					 xmlns:fx="http://ns.adobe.com/mxml/2009"
+					 xmlns:s="library://ns.adobe.com/flex/spark"
+					 title="{ResourceBundleUtil.CAMERA_TITLE}">
+	<fx:Script>
+		<![CDATA[
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
+		]]>
+	</fx:Script>
 	
 	<core:layout>
-		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</core:layout>
 	
-	<s:Button id="deviceCameraButton" width="100%"
-			  label="{resourceManager.getString('explore_air_mobile', 'device_camera_title')}"
+	<s:Button id="deviceCameraButton" width="100%" label="{ResourceBundleUtil.DEVICE_CAMERA_TITLE}"
 			  click="navigator.pushView(DeviceCameraView)"/>
 	
-	<s:Button id="embeddedCamera" width="100%"
-			  label="{resourceManager.getString('explore_air_mobile', 'embedded_camera_title')}"
+	<s:Button id="embeddedCamera" width="100%" label="{ResourceBundleUtil.EMBEDDED_CAMERA_TITLE}"
 			  click="navigator.pushView(EmbeddedCameraView)"/>
 	
 </core:BackButtonView>

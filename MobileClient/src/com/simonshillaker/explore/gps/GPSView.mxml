@@ -2,7 +2,7 @@
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
 		xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
-		title="{resourceManager.getString('explore_air_mobile', 'gps_title')}"
+		title="{ResourceBundleUtil.GPS_TITLE}"
 		remove="onRemove()">
 
 	<core:layout>
@@ -17,6 +17,7 @@
 			import com.google.maps.MapType;
 			import com.google.maps.controls.ScaleControl;
 			import com.google.maps.controls.ZoomControl;
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
 			import com.simonshillaker.explore.maps.GoogleMapsConstants;
 			
 			import flash.sensors.Geolocation;
@@ -68,7 +69,7 @@
 					
 					if(geolocation.muted)
 					{
-						infoText = resourceManager.getString('explore_air_mobile', 'gps_not_enabled');
+						infoText = ResourceBundleUtil.GPS_NOT_ENABLED;
 						return false;
 					}
 					
@@ -77,7 +78,7 @@
 				}
 				else 
 				{
-					infoText = resourceManager.getString('explore_air_mobile', 'gps_not_supported');
+					infoText = ResourceBundleUtil.GPS_NOT_SUPPORTED;
 					return false;
 				}
 				
@@ -148,7 +149,7 @@
 	</fx:Script>
 
 	<s:Button id="findMeButton" 
-			  label="{resourceManager.getString('explore_air_mobile', 'find_me_button_label')}" 
+			  label="{ResourceBundleUtil.FIND_ME_BUTTON_LABEL}" 
 			  width="100%" 
 			  click="findMeHandler(event)"/>
 	

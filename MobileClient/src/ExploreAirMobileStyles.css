@@ -3,23 +3,23 @@
 @namespace mobile "spark.skins.mobile.*";
 
 s|ViewNavigator {
-	fontSize: 16px;
+	fontSize: 20px;
 }
 
 s|ButtonBarButton {
-	fontSize: 16px;
+	fontSize: 20px;
 }
 
 s|List {
-	fontSize: 16px;	
+	fontSize: 20px;	
 }
 
 s|Button {
-	fontSize: 16px;
+	fontSize: 20px;
 }
 
 s|Label {
-	fontSize: 16px;
+	fontSize: 20px;
 }
 
 .error {
@@ -27,6 +27,6 @@ s|Label {
 	fontWeight: bold;
 }
 .title {
-	fontSize: 18px;
+	fontSize: 22px;
 	fontWeight: bold;
 }

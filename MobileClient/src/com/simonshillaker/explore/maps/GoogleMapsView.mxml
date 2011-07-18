@@ -1,30 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
-		xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" 
-		title="{resourceManager.getString('explore_air_mobile', 'google_maps_title')}"
-		xmlns:maps="com.google.maps.*" >
+					 xmlns:fx="http://ns.adobe.com/mxml/2009"
+					 xmlns:s="library://ns.adobe.com/flex/spark"
+					 xmlns:maps="com.google.maps.*"
+					 title="{ResourceBundleUtil.GOOGLE_MAPS_TITLE}">
 	
 	<core:layout>
-		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</core:layout>
 	
 	<fx:Script>
 		<![CDATA[
 			import com.google.maps.LatLng;
-			import com.google.maps.LatLngBounds;
 			import com.google.maps.Map;
 			import com.google.maps.MapEvent;
 			import com.google.maps.MapType;
 			import com.google.maps.controls.ScaleControl;
 			import com.google.maps.controls.ZoomControl;
-			import com.google.maps.overlays.GroundOverlay;
 			import com.google.maps.services.ClientGeocoder;
-			import com.google.maps.services.ClientGeocoderOptions;
-			import com.google.maps.services.GeocodingEvent;
-			import com.google.maps.services.Placemark;
-			
-			import mx.events.FlexEvent;
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
 			
 			private var geoCoder:ClientGeocoder; 
 			
@@ -60,9 +54,11 @@
 		]]>
 	</fx:Script>
 	
-	<s:Button label="Show synchronous initialisation" visible="{!isMapReady}" includeInLayout="{!isMapReady}" click="initialiseMap()" />
-	<s:BusyIndicator includeInLayout="{!isMapReady}" visible="{!isMapReady}"/>
+	<s:Button visible="{!isMapReady}" label="Show synchronous initialisation" click="initialiseMap()"
+			  includeInLayout="{!isMapReady}"/>
+	<s:BusyIndicator visible="{!isMapReady}" includeInLayout="{!isMapReady}"/>
 	
-	<s:Group id="mapGroup" width="100%" height="100%" visible="{isMapReady}" includeInLayout="{isMapReady}"/>
+	<s:Group id="mapGroup" visible="{isMapReady}" width="100%" height="100%"
+			 includeInLayout="{isMapReady}"/>
 	
 </core:BackButtonView>

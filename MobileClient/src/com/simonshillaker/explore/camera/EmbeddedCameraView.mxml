@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
-										 xmlns:fx="http://ns.adobe.com/mxml/2009"
-										 xmlns:s="library://ns.adobe.com/flex/spark"
-										 xmlns:mx="library://ns.adobe.com/flex/mx"
-										 creationComplete="onCreationComplete()"
-										 title="{resourceManager.getString('explore_air_mobile', 'embedded_camera_title')}">
+					 xmlns:fx="http://ns.adobe.com/mxml/2009"
+					 xmlns:s="library://ns.adobe.com/flex/spark"
+					 xmlns:mx="library://ns.adobe.com/flex/mx"
+					 creationComplete="onCreationComplete()"
+					 title="{ResourceBundleUtil.EMBEDDED_CAMERA_TITLE}">
 
 	<core:layout>
-		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</core:layout>
 	
 	<fx:Script>
 		<![CDATA[
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
 			
 			[Bindable]
 			private var cameraSupported:Boolean = true;
@@ -42,7 +43,7 @@
 	</fx:Script>
 	
 		<s:Label id="infoLabel" visible="{!cameraSupported}" includeInLayout="{!cameraSupported}"
-				 text="Camera not supported."/>
+				 text="{ResourceBundleUtil.CAMERA_NOT_SUPPORTED}"/>
 		
 		<mx:UIComponent id="videoHolder" visible="{cameraSupported}" width="100%" height="100%"
 						includeInLayout="{cameraSupported}"/>

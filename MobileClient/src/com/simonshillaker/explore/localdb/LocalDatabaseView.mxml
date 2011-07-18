@@ -2,13 +2,12 @@
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
 					 xmlns:fx="http://ns.adobe.com/mxml/2009"
 					 xmlns:s="library://ns.adobe.com/flex/spark"
-					 title="{resourceManager.getString('explore_air_mobile', 'local_db_title')}"
-					 remove="onRemove()">
+					 remove="onRemove()"
+					 title="{ResourceBundleUtil.LOCAL_DB_TITLE}">
 	
 	<fx:Script>
 		<![CDATA[
-			import mx.events.FlexEvent;
-			import mx.rpc.events.FaultEvent;
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
 			
 			private static const LEFT_COL_WIDTH:int = 80;
 			
@@ -51,48 +50,41 @@
 
 	<s:Scroller width="100%" height="100%">
 
-		<s:VGroup id="mainViewGroup" 
-				  visible="{userDao.initialised}" 
-				  width="100%" height="100%"
-				  horizontalAlign="center" 
-				  paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
+		<s:VGroup id="mainViewGroup" visible="{userDao.initialised}" width="100%" height="100%"
+				  horizontalAlign="center" paddingBottom="5" paddingLeft="5" paddingRight="5"
+				  paddingTop="5">
 		
-			<s:Label id="errorLabel" 
-					 width="100%" 
-					 visible="{userDao.errorText.length > 0}" 
-					 includeInLayout="{userDao.errorText.length > 0}"
-					 text = "{userDao.errorText}"
-					 styleName="error"/>
+			<s:Label id="errorLabel" visible="{userDao.errorText.length &gt; 0}" width="100%"
+					 includeInLayout="{userDao.errorText.length &gt; 0}" styleName="error"
+					 text="{userDao.errorText}"/>
 		
 			<s:HGroup width="100%" verticalAlign="middle">
 				
-				<s:Label width="{LEFT_COL_WIDTH}" 
-						 text="{resourceManager.getString('explore_air_mobile', 'local_db_username_label')}"/>
+				<s:Label width="{LEFT_COL_WIDTH}"
+						 text="{ResourceBundleUtil.LOCAL_DB_USERNAME}"/>
 				
-				<s:TextInput id="userNameInput" 
-							 width="100%"/>
+				<s:TextInput id="userNameInput" width="100%"/>
 			
 			</s:HGroup>
 			
 			<s:HGroup width="100%" verticalAlign="middle">
 				
-				<s:Label width="{LEFT_COL_WIDTH}"		
-						 text="{resourceManager.getString('explore_air_mobile', 'local_db_name_label')}"/>
+				<s:Label width="{LEFT_COL_WIDTH}"
+						 text="{ResourceBundleUtil.LOCAL_DB_NAME}"/>
 				
 				<s:TextInput id="nameInput" width="100%"/>
 			
 			</s:HGroup>
 			
-			<s:Button width="100%" 
-					  label="{resourceManager.getString('explore_air_mobile', 'local_db_add_user_label')}"
+			<s:Button width="100%"
+					  label="{ResourceBundleUtil.LOCAL_DB_ADD_USER}"
 					  click="handleAddUser(event)"/>
 			
-			<s:List width="100%" height="100%" minHeight="80" 
-					dataProvider="{userDao.users}"
+			<s:List width="100%" height="100%" minHeight="80" dataProvider="{userDao.users}"
 					itemRenderer="com.simonshillaker.explore.localdb.UserItemRenderer"/>
 			
-			<s:Button width="100%" 
-					  label="{resourceManager.getString('explore_air_mobile', 'local_db_clear_data_label')}"
+			<s:Button width="100%"
+					  label="{ResourceBundleUtil.LOCAL_DB_CLEAR_DATA}"
 					  click="handleClearAllUsers()"/> 
 			
 		</s:VGroup>

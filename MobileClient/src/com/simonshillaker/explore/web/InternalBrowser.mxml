@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:View xmlns:core="com.simonshillaker.explore.core.*"
+<core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
 		xmlns:fx="http://ns.adobe.com/mxml/2009"
 		xmlns:s="library://ns.adobe.com/flex/spark"
-		creationComplete="onCreationComplete(event)" 
-		remove="onRemove()"
-		tabBarVisible="false"
-		title="{resourceManager.getString('explore_air_mobile', 'internal_browser_title')}">
+		creationComplete="onCreationComplete(event)" remove="onRemove()" tabBarVisible="false"
+		title="{ResourceBundleUtil.INTERNAL_BROWSER_TITLE}">
 	
 	<fx:Script>
 		<![CDATA[
-			import mx.binding.utils.BindingUtils;
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			
 			import mx.events.FlexEvent;
 			import mx.resources.IResourceManager;
 			import mx.resources.ResourceManager;
@@ -28,12 +27,12 @@
 			private function onCreationComplete(event:FlexEvent):void 
 			{
 				if(!StageWebView.isSupported) {
-					errorLabel.text = resourceManager.getString('explore_air_mobile','internal_browser_not_supported');
+					errorLabel.text = ResourceBundleUtil.INTERNAL_BROWSER_NOT_SUPPORTED;
 					this.enabled = false;
 				}
 				
 				webView = new StageWebView();
-				webView.loadURL(resourceManager.getString('explore_air_mobile', 'web_default_url'));
+				webView.loadURL(ResourceBundleUtil.WEB_DEFAULT_URL);
 				webView.addEventListener(ErrorEvent.ERROR, handleWebError);
 				webView.addEventListener(Event.COMPLETE, handleWebSuccess);
 				
@@ -123,35 +122,29 @@
 		]]>
 	</fx:Script>
 	
-	<s:navigationContent>
-		<s:Button id="backButton" visible="{navigator.length &gt; 1}"
-				  label="{resourceManager.getString('explore_air_mobile','back_label')}"
-				  click="navigator.popView()" includeInLayout="{navigator.length &gt; 1}"/>
-	</s:navigationContent>
-
 	<s:VGroup id="browserContainer" width="100%" height="100%" >
 		<s:HGroup id="navBar" width="100%">
 			<s:Button id="historyBackButton" width="40" height="40"
-				  	label="{resourceManager.getString('explore_air_mobile', 'nav_back_label')}"
-				  	click="historyBack()"/>
+					  label="{ResourceBundleUtil.NAV_BACK_LABEL}"
+					  click="historyBack()"/>
 			
 			<s:Button id="historyForwardButton" width="40" height="40"
-				  	label="{resourceManager.getString('explore_air_mobile', 'nav_forward_label')}"
-				  	click="historyForward()"/>
+					  label="{ResourceBundleUtil.NAV_FORWARD_LABEL}"
+					  click="historyForward()"/>
 			
 			<s:TextInput id="urlInput" width="100%" height="40" enter="goToUrl()" prompt="Enter a URL"/>
 			
 			<s:Button id="goToURLButton" width="60" height="40" label="Go" click="goToUrl()"/>
-		
+			
 		</s:HGroup>
-	
+		
 		<s:Group id="webViewPlaceholder" width="100%" height="100%" />
 	</s:VGroup>
 	
 	<s:BusyIndicator visible="{isLoading}" horizontalCenter="0" verticalCenter="0"/>
 	
 	<s:Label id="errorLabel" visible="{isError}" horizontalCenter="0"
-			 text="{resourceManager.getString('explore_air_mobile','internal_browser_invalid_url')}"
+			 text="{ResourceBundleUtil.INTERNAL_BROWSER_INVALID_URL}"
 			 verticalCenter="0"/>
-	
-</s:View>
+
+</core:BackButtonView>

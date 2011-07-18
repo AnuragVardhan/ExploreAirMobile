@@ -2,7 +2,7 @@
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
 		xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
-		title="{resourceManager.getString('explore_air_mobile', 'web_title')}">
+		title="{ResourceBundleUtil.WEB_TITLE}">
 	
 	<core:layout>
 		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
@@ -10,10 +10,12 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			
 			import flash.net.navigateToURL;
 			
 			private function goToNativeWebBrowser():void {
-				var url:String = resourceManager.getString('explore_air_mobile', 'web_default_url');
+				var url:String = ResourceBundleUtil.WEB_DEFAULT_URL;
 				
 				navigateToURL(new URLRequest(url));
 			}
@@ -21,12 +23,12 @@
 	</fx:Script>
 	
 	
-	<s:Button label="{resourceManager.getString('explore_air_mobile', 'internal_browser_title')}" 
+	<s:Button label="{ResourceBundleUtil.INTERNAL_BROWSER_TITLE}" 
 			  id="embeddedBrowserButton" 
 			  width="100%" 
 			  click="navigator.pushView(InternalBrowser)" />
 
-	<s:Button label="{resourceManager.getString('explore_air_mobile', 'native_browser_title')}" 
+	<s:Button label="{ResourceBundleUtil.NATIVE_BROWSER_TITLE}" 
 			  id="nativeBrowserButton" 
 			  width="100%" 
 			  click="goToNativeWebBrowser()" />

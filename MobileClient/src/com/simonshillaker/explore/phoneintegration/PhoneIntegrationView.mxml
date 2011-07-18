@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
-		xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" 
-		title="{resourceManager.getString('explore_air_mobile', 'phone_integration_title')}">
+					 xmlns:fx="http://ns.adobe.com/mxml/2009"
+					 xmlns:s="library://ns.adobe.com/flex/spark"
+					 title="{ResourceBundleUtil.PHONE_INTEGRATION_TITLE}">
 	
 	<fx:Script>
 		<![CDATA[
 			import com.simonshillaker.explore.accelerometer.AccelerometerView;
 			import com.simonshillaker.explore.camera.CameraView;
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
 			import com.simonshillaker.explore.email.EmailView;
 			import com.simonshillaker.explore.gps.GPSView;
 			import com.simonshillaker.explore.localdb.LocalDatabaseView;
@@ -28,51 +29,46 @@
 		]]>
 	</fx:Script>
 	
-	<s:Scroller width="100%" height="100%" >
+	<s:Scroller width="100%" height="100%">
 		
-		<s:VGroup paddingBottom="5" paddingTop="5" paddingLeft="5" paddingRight="5" >
+		<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
 			
-			<s:Button label="{resourceManager.getString('explore_air_mobile', 'local_db_title')}"
-			  		width="100%" 
-			  		click="navigator.pushView(LocalDatabaseView)" />
+			<s:Button width="100%"
+					  label="{ResourceBundleUtil.LOCAL_DB_TITLE}"
+					  click="navigator.pushView(LocalDatabaseView)"/>
 			
-			<s:Button label="{resourceManager.getString('explore_air_mobile', 'chat_title')}"
-			  		width="100%" 
-			  		click="navigator.pushView(P2PChatLogin)" />
+			<s:Button width="100%"
+					  label="{ResourceBundleUtil.CHAT_TITLE}"
+					  click="navigator.pushView(P2PChatLogin)"/>
 	
-			<s:Button label="{resourceManager.getString('explore_air_mobile', 'gps_title')}"
-			  		width="100%" 
-			  		click="navigator.pushView(GPSView)" />
+			<s:Button width="100%"
+					  label="{ResourceBundleUtil.GPS_TITLE}"
+					  click="navigator.pushView(GPSView)"/>
 			
-			<s:Button label="{resourceManager.getString('explore_air_mobile', 'web_title')}"
-			  		width="100%" 
-			  		click="navigator.pushView(WebView)" />
+			<s:Button width="100%"
+					  label="{ResourceBundleUtil.WEB_TITLE}"
+					  click="navigator.pushView(WebView)"/>
 			
-			<s:Button label="{resourceManager.getString('explore_air_mobile', 'maps_title')}"
-			  		width="100%" 
-			  		click="navigator.pushView(MapsView)" />
+			<s:Button width="100%"
+					  label="{ResourceBundleUtil.MAPS_TITLE}"
+					  click="navigator.pushView(MapsView)"/>
 		
-			<s:Button label="{resourceManager.getString('explore_air_mobile', 'accelerometer_title')}"
-					  width="100%"
-					  click="navigator.pushView(AccelerometerView)" />
+			<s:Button width="100%"
+					  label="{ResourceBundleUtil.ACCELEROMETER_TITLE}"
+					  click="navigator.pushView(AccelerometerView)"/>
 			
-			<s:Button label="{resourceManager.getString('explore_air_mobile', 'camera_title')}"
-			  		width="100%" 
-			  		click="navigator.pushView(CameraView)" />
+			<s:Button width="100%"
+					  label="{ResourceBundleUtil.CAMERA_TITLE}"
+					  click="navigator.pushView(CameraView)"/>
 			
-			<s:Button label="{resourceManager.getString('explore_air_mobile', 'email_title')}"
-			  		width="100%" 
-			  		click="navigator.pushView(EmailView)" />
+			<s:Button width="100%"
+					  label="{ResourceBundleUtil.EMAIL_TITLE}"
+					  click="navigator.pushView(EmailView)"/>
 			
-			<s:Button id="phoneButton" 
-			  		label="Phone" 
-			  		width="100%" 
-			  		click="phoneButton_clickHandler(event)"/>
+			<s:Button id="phoneButton" width="100%" label="Phone"
+					  click="phoneButton_clickHandler(event)"/>
 			
-			<s:Button id="smsButton" 
-			  		label="SMS" 
-			  		width="100%"
-			  		click="smsButton_clickHandler(event)"/>
+			<s:Button id="smsButton" width="100%" label="SMS" click="smsButton_clickHandler(event)"/>
 
 		</s:VGroup>
 		
