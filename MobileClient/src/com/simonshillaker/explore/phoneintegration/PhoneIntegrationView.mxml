@@ -6,11 +6,12 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import com.simonshillaker.explore.accelerometer.AccelerometerView;
 			import com.simonshillaker.explore.camera.CameraView;
 			import com.simonshillaker.explore.email.EmailView;
 			import com.simonshillaker.explore.gps.GPSView;
 			import com.simonshillaker.explore.localdb.LocalDatabaseView;
-			import com.simonshillaker.explore.localnetwork.LocalNetworkView;
+			import com.simonshillaker.explore.localnetwork.P2PChatLogin;
 			import com.simonshillaker.explore.maps.MapsView;
 			import com.simonshillaker.explore.web.WebView;
 			
@@ -35,9 +36,9 @@
 			  		width="100%" 
 			  		click="navigator.pushView(LocalDatabaseView)" />
 			
-			<s:Button label="{resourceManager.getString('explore_air_mobile', 'local_network_title')}"
+			<s:Button label="{resourceManager.getString('explore_air_mobile', 'chat_title')}"
 			  		width="100%" 
-			  		click="navigator.pushView(LocalNetworkView)" />
+			  		click="navigator.pushView(P2PChatLogin)" />
 	
 			<s:Button label="{resourceManager.getString('explore_air_mobile', 'gps_title')}"
 			  		width="100%" 
@@ -51,6 +52,10 @@
 			  		width="100%" 
 			  		click="navigator.pushView(MapsView)" />
 		
+			<s:Button label="{resourceManager.getString('explore_air_mobile', 'accelerometer_title')}"
+					  width="100%"
+					  click="navigator.pushView(AccelerometerView)" />
+			
 			<s:Button label="{resourceManager.getString('explore_air_mobile', 'camera_title')}"
 			  		width="100%" 
 			  		click="navigator.pushView(CameraView)" />

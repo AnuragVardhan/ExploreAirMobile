@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
+					 xmlns:fx="http://ns.adobe.com/mxml/2009"
+					 xmlns:s="library://ns.adobe.com/flex/spark"
+					 creationComplete="initialise()"
+					 title="{resourceManager.getString('explore_air_mobile', 'accelerometer_title')}">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.simonshillaker.network.P2PSenderReceiver;
+			
+			import flash.sensors.Accelerometer;
+			
+			import spark.components.Application;
+			
+			private var networkConnector:P2PSenderReceiver = new P2PSenderReceiver();
+			
+			private var accelerometer:Accelerometer = new Accelerometer();
+			
+			private function initialise():void
+			{
+				accelerometer.addEventListener(AccelerometerEvent.UPDATE, onAccelerometerChangeX);
+				
+				stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGE, 
+					onOrientationChange); 
+			}
+				
+			private function onOrientationChange(event:StageOrientationEvent):void 
+			{ 
+				event.stopImmediatePropagation();
+				event.preventDefault();
+			}
+			
+			private function handleRadioButtonChange(event:Event):void
+			{
+				if(buttonGroup.selectedValue == "X")
+				{
+					accelerometer.removeEventListener(AccelerometerEvent.UPDATE, onAccelerometerChangeY);
+					accelerometer.addEventListener(AccelerometerEvent.UPDATE, onAccelerometerChangeX);
+				
+					arrow.rotationY = 0;
+					arrow.height = 150
+					arrow.verticalCenter = 150;
+					arrow.horizontalCenter = 0;
+
+				}
+				else if(buttonGroup.selectedValue == "Y")
+				{
+					accelerometer.removeEventListener(AccelerometerEvent.UPDATE, onAccelerometerChangeX);
+					accelerometer.addEventListener(AccelerometerEvent.UPDATE, onAccelerometerChangeY);
+					
+					arrow.rotationX = 0;
+					arrow.height = 300;
+					arrow.verticalCenter = 0;
+					arrow.horizontalCenter = 50;
+					
+				}
+			}
+			
+			private function onAccelerometerChangeX(event:AccelerometerEvent):void
+			{
+				arrow.rotationX = Math.round(event.accelerationY*360);
+			}
+			
+			private function onAccelerometerChangeY(event:AccelerometerEvent):void
+			{
+				arrow.rotationY = Math.round(event.accelerationX*360);
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<s:RadioButtonGroup id="buttonGroup" change="handleRadioButtonChange(event)"/>
+	</fx:Declarations>
+	
+	<s:Label top="5" horizontalCenter="0"
+			 text="{resourceManager.getString('explore_air_mobile', 'accelerometer_explanation')}"/>
+	
+	<s:HGroup top="20" horizontalCenter="0">
+		<s:RadioButton label="Rotate X" value="X" groupName="buttonGroup" selected="true"/>
+		<s:RadioButton label="Rotate Y" value="Y" groupName="buttonGroup" />
+	</s:HGroup>
+	
+	<s:Image id="arrow" height="150" verticalCenter="150" source="@Embed('assets/arrow.png')"
+			 horizontalCenter="0" />
+</core:BackButtonView>
