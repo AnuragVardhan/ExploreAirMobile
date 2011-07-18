@@ -37,6 +37,7 @@ package com.simonshillaker.explore.core
 		public static const GPS_NOT_SUPPORTED:String = getFromBundle('gps_not_supported');
 		public static const GPS_NOT_ENABLED:String = getFromBundle('gps_not_enabled');
 		public static const FIND_ME_BUTTON_LABEL:String = getFromBundle('find_me_button_label');
+		public static const GPS_WARNING_LABEL:String = getFromBundle('gps_warning_label');
 
 		//Local DB
 		public static const LOCAL_DB_TITLE:String = getFromBundle('local_db_title');

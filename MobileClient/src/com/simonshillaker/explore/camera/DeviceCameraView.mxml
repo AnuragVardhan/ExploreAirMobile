@@ -5,10 +5,6 @@
 					 creationComplete="onCreationComplete()"
 					 title="{ResourceBundleUtil.DEVICE_CAMERA_TITLE}">
 	
-	<core:layout>
-		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
-	</core:layout>
-	
 	<fx:Script>
 		<![CDATA[
 			import com.simonshillaker.explore.core.PageInfo;
@@ -55,6 +51,9 @@
 			}
 		]]>
 	</fx:Script>
+	<core:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</core:layout>
 	
 	<s:Label visible="{!cameraSupported}" includeInLayout="{!cameraSupported}"
 			 text="CameraUI not supported."/>
@@ -62,7 +61,7 @@
 	<s:Button id="cameraButton" visible="{cameraSupported}" label="Take Another"
 			  click="handleCameraButtonClick(event)" includeInLayout="{cameraSupported}"/>
 	
-	<s:Label id="imageUrl" text=""/>
-	<s:Image id="image" width="100%"/>
+	<s:Label id="imageUrl" text="" width="100%"/>
+	<s:Image id="image" height="100%" width="100%"/>
 
 </core:BackButtonView>

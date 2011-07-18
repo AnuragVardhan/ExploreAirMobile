@@ -3,11 +3,11 @@
 		xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		title="{ResourceBundleUtil.GPS_TITLE}"
-		remove="onRemove()"
-		creationComplete="onCreationComplete(event)">
+		creationComplete="onCreationComplete(event)"
+		removed="onHide()">
 
 	<core:layout>
-		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
+		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center" paddingLeft="5" paddingRight="5"/>
 	</core:layout>
 	
 	<fx:Script>
@@ -55,16 +55,19 @@
 			
 			private function findMeHandler(event:MouseEvent):void
 			{
+				isBusy = false;
 				findMeButton.visible = false;
 				findMeButton.includeInLayout = false;
+				warningLabel.visible = false;
+				warningLabel.includeInLayout = false;
+				
+				validateNow();
 				
 				initialise();
 			}
 			
 			protected function initialise():void
 			{
-				isBusy = true;
-				
 				isGpsSupported = initialiseGeolocation();
 				
 				if(!isGpsSupported)
@@ -141,7 +144,7 @@
 				isBusy = false;
 			}
 			
-			private function onRemove():void
+			private function onHide():void
 			{
 				if(map)
 				{
@@ -149,7 +152,6 @@
 				}
 				if(geolocation)
 				{
-					geolocation = null;
 					geolocation.removeEventListener(GeolocationEvent.UPDATE, handleGeolocationUpdate);
 				}
 			}
@@ -157,6 +159,9 @@
 		]]>
 	</fx:Script>
 
+	<s:Label id="warningLabel" width="100%" 
+			 text="{ResourceBundleUtil.GPS_WARNING_LABEL}" />
+	
 	<s:Button id="findMeButton" 
 			  label="{ResourceBundleUtil.FIND_ME_BUTTON_LABEL}" 
 			  width="100%" 

@@ -46,8 +46,8 @@
 					accelerometer.addEventListener(AccelerometerEvent.UPDATE, onAccelerometerChangeX);
 				
 					arrow.rotationY = 0;
-					arrow.height = 150
-					arrow.verticalCenter = 150;
+					arrow.height = 200
+					arrow.verticalCenter = 100;
 					arrow.horizontalCenter = 0;
 
 				}
@@ -90,6 +90,6 @@
 					   value="Y" groupName="buttonGroup" />
 	</s:HGroup>
 	
-	<s:Image id="arrow" height="150" verticalCenter="150" source="@Embed('assets/arrow.png')"
+	<s:Image id="arrow" height="200" verticalCenter="100" source="@Embed('assets/arrow.png')"
 			 horizontalCenter="0" />
 </core:BackButtonView>

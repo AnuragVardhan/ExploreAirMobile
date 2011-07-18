@@ -17,6 +17,8 @@
 			import mx.resources.IResourceManager;
 			import mx.resources.ResourceManager;
 			
+			import spark.events.TextOperationEvent;
+			
 			[Bindable]
 			public var webView:StageWebView;
 			
@@ -127,6 +129,14 @@
 				return ResourceManager.getInstance();
 			}
 			
+			private function urlInputChangeHandler(event:TextOperationEvent):void
+			{
+				if(urlInput.text == "")
+				{
+					urlInput.insertText("http://www.");
+				}
+			}
+			
 		]]>
 	</fx:Script>
 	
@@ -140,7 +150,8 @@
 					  label="{ResourceBundleUtil.NAV_FORWARD_LABEL}"
 					  click="historyForward()"/>
 			
-			<s:TextInput id="urlInput" width="100%" height="40" enter="goToUrl()" prompt="Enter a URL"/>
+			<s:TextInput id="urlInput" width="100%" height="40" enter="goToUrl()" prompt="Enter a URL"
+						 change="urlInputChangeHandler(event)"/>
 			
 			<s:Button id="goToURLButton" width="60" height="40" label="Go" click="goToUrl()"/>
 			
