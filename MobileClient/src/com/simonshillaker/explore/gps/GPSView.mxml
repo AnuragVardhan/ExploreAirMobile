@@ -3,7 +3,8 @@
 		xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		title="{ResourceBundleUtil.GPS_TITLE}"
-		remove="onRemove()">
+		remove="onRemove()"
+		creationComplete="onCreationComplete(event)">
 
 	<core:layout>
 		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
@@ -17,10 +18,14 @@
 			import com.google.maps.MapType;
 			import com.google.maps.controls.ScaleControl;
 			import com.google.maps.controls.ZoomControl;
+			import com.simonshillaker.explore.core.PageInfo;
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			import com.simonshillaker.explore.core.SourceURLs;
 			import com.simonshillaker.explore.maps.GoogleMapsConstants;
 			
 			import flash.sensors.Geolocation;
+			
+			import mx.events.FlexEvent;
 			
 			private var geolocation:Geolocation;
 			
@@ -40,6 +45,13 @@
 			private var isMapReady:Boolean = false;
 			[Bindable]
 			private var isBusy:Boolean = false;
+			
+			protected function onCreationComplete(event:FlexEvent):void
+			{
+				info = new PageInfo(title,
+					ResourceBundleUtil.GPS_INFO,
+					SourceURLs.GPS);				
+			}
 			
 			private function findMeHandler(event:MouseEvent):void
 			{
