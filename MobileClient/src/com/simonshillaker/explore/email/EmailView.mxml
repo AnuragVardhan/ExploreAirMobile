@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+<core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*" 
+		xmlns:fx="http://ns.adobe.com/mxml/2009"
 		xmlns:s="library://ns.adobe.com/flex/spark"
-		title="{ResourceBundleUtil.EMAIL_TITLE}">
+		title="{ResourceBundleUtil.EMAIL_TITLE}"
+		creationComplete="onCreationComplete(event)">
 	
 	<fx:Script>
 		<![CDATA[
+			import com.simonshillaker.explore.core.PageInfo;
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			import com.simonshillaker.explore.core.SourceURLs;
 			
+			import mx.events.FlexEvent;
 			import mx.resources.IResourceManager;
 			import mx.resources.ResourceManager;
 			import mx.utils.StringUtil;
@@ -17,6 +22,13 @@
 			private var isError:Boolean;
 			
 			private var mailToRequest:String = "mailto:{0}?cc={1}&subject={2}&body={3}";
+			
+			private function onCreationComplete(event:FlexEvent):void
+			{
+				info = new PageInfo(title,
+					ResourceBundleUtil.EMAIL_INFO,
+					SourceURLs.EMAIL);
+			}
 			
 			private function sendMailtoRequest():void
 			{
@@ -52,11 +64,7 @@
 				return mailtoBody;
 			}
 	
-			override protected function get resourceManager():IResourceManager
-			{
-				return ResourceManager.getInstance();
-			}
-			]]>
+		]]>
 	</fx:Script>
 	
 	<s:Scroller width="100%" height="100%">
@@ -94,4 +102,4 @@
 		
 	</s:Scroller>
 	
-</s:View>
+</core:BackButtonView>

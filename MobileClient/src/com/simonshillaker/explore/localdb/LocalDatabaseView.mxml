@@ -3,16 +3,29 @@
 					 xmlns:fx="http://ns.adobe.com/mxml/2009"
 					 xmlns:s="library://ns.adobe.com/flex/spark"
 					 remove="onRemove()"
-					 title="{ResourceBundleUtil.LOCAL_DB_TITLE}">
+					 title="{ResourceBundleUtil.LOCAL_DB_TITLE}"
+					 creationComplete="onCreationComplete(event)">
 	
 	<fx:Script>
 		<![CDATA[
+			import com.simonshillaker.explore.core.PageInfo;
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			import com.simonshillaker.explore.core.SourceURLs;
+			
+			import mx.events.FlexEvent;
+			import mx.resources.ResourceBundle;
 			
 			private static const LEFT_COL_WIDTH:int = 80;
 			
 			[Bindable]
 			private var userDao:UserDao = new UserDao();
+
+			private function onCreationComplete(event:FlexEvent):void
+			{
+				info = new PageInfo(title,
+					ResourceBundleUtil.LOCAL_DB_INFO,
+					SourceURLs.LOCAL_DB);
+			}
 			
 			private function handleAddUser(event:MouseEvent):void
 			{
@@ -41,6 +54,7 @@
 			{
 				userDao.dispose();
 			}
+			
 			
 		]]>
 	</fx:Script>

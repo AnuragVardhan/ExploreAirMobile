@@ -12,7 +12,9 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import com.simonshillaker.explore.core.PageInfo;
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			import com.simonshillaker.explore.core.SourceURLs;
 			
 			[Bindable]
 			private var cameraSupported:Boolean = true;
@@ -37,6 +39,10 @@
 				{
 					cameraSupported = false;
 				}
+				
+				info = new PageInfo(title,
+					ResourceBundleUtil.EMBEDDED_CAMERA_INFO,
+					SourceURLs.EMBEDDED_CAMERA);
 			}
 			
 		]]>

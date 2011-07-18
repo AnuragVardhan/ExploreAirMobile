@@ -2,12 +2,16 @@
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
 		xmlns:fx="http://ns.adobe.com/mxml/2009"
 		xmlns:s="library://ns.adobe.com/flex/spark"
-		creationComplete="onCreationComplete(event)" remove="onRemove()" tabBarVisible="false"
+		creationComplete="onCreationComplete(event)" 
+		remove="onRemove()" 
+		tabBarVisible="false"
 		title="{ResourceBundleUtil.INTERNAL_BROWSER_TITLE}">
 	
 	<fx:Script>
 		<![CDATA[
+			import com.simonshillaker.explore.core.PageInfo;
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			import com.simonshillaker.explore.core.SourceURLs;
 			
 			import mx.events.FlexEvent;
 			import mx.resources.IResourceManager;
@@ -26,6 +30,10 @@
 			
 			private function onCreationComplete(event:FlexEvent):void 
 			{
+				info = new PageInfo(title,
+					ResourceBundleUtil.INTERNAL_BROWSER_INFO,
+					SourceURLs.WEB);
+				
 				if(!StageWebView.isSupported) {
 					errorLabel.text = ResourceBundleUtil.INTERNAL_BROWSER_NOT_SUPPORTED;
 					this.enabled = false;

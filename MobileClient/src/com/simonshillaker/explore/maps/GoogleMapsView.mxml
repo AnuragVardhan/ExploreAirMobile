@@ -3,7 +3,8 @@
 					 xmlns:fx="http://ns.adobe.com/mxml/2009"
 					 xmlns:s="library://ns.adobe.com/flex/spark"
 					 xmlns:maps="com.google.maps.*"
-					 title="{ResourceBundleUtil.GOOGLE_MAPS_TITLE}">
+					 title="{ResourceBundleUtil.GOOGLE_MAPS_TITLE}"
+					 creationComplete="onCreationComplete(event)">
 	
 	<core:layout>
 		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
@@ -18,7 +19,11 @@
 			import com.google.maps.controls.ScaleControl;
 			import com.google.maps.controls.ZoomControl;
 			import com.google.maps.services.ClientGeocoder;
+			import com.simonshillaker.explore.core.PageInfo;
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			import com.simonshillaker.explore.core.SourceURLs;
+			
+			import mx.events.FlexEvent;
 			
 			private var geoCoder:ClientGeocoder; 
 			
@@ -27,7 +32,14 @@
 			
 			private var map:Map;
 			
-			protected function initialiseMap():void
+			private function onCreationComplete(event:FlexEvent):void
+			{
+				info = new PageInfo(title,
+					ResourceBundleUtil.MAPS_INFO,
+					SourceURLs.GOOGLE_MAPS);
+			}
+			
+			private function initialiseMap():void
 			{
 				map = new Map();
 				map.sensor = "false";
@@ -41,7 +53,7 @@
 				mapGroup.addElement(map);
 			}
 			
-			protected function handleMapReady(event:MapEvent):void
+			private function handleMapReady(event:MapEvent):void
 			{
 				isMapReady = true;
 				

@@ -22,8 +22,6 @@
 			
 			import flash.sensors.Geolocation;
 			
-			import mx.events.FlexEvent;
-			
 			private var geolocation:Geolocation;
 			
 			private var map:Map;
@@ -36,13 +34,20 @@
 			
 			[Bindable]
 			private var infoText:String = "";
-
 			[Bindable]
 			private var isGpsSupported:Boolean = true;
 			[Bindable]
 			private var isMapReady:Boolean = false;
 			[Bindable]
 			private var isBusy:Boolean = false;
+			
+			private function findMeHandler(event:MouseEvent):void
+			{
+				findMeButton.visible = false;
+				findMeButton.includeInLayout = false;
+				
+				initialise();
+			}
 			
 			protected function initialise():void
 			{
@@ -84,7 +89,7 @@
 				
 			}
 
-			protected function handleGeolocationUpdate(event:GeolocationEvent):void
+			private function handleGeolocationUpdate(event:GeolocationEvent):void
 			{
 				latitude = event.latitude;
 				longitude = event.longitude;
@@ -98,7 +103,7 @@
 				}
 			}
 			
-			protected function initialiseMap():void
+			private function initialiseMap():void
 			{
 				map = new Map();
 				map.sensor = "false";
@@ -115,7 +120,7 @@
 				invalidateDisplayList();
 			}
 			
-			protected function handleMapReady(event:MapEvent):void
+			private function handleMapReady(event:MapEvent):void
 			{
 				map.addControl(new ScaleControl());
 				map.addControl(new ZoomControl());
@@ -124,15 +129,7 @@
 				isBusy = false;
 			}
 			
-			protected function findMeHandler(event:MouseEvent):void
-			{
-				findMeButton.visible = false;
-				findMeButton.includeInLayout = false;
-
-				initialise();
-			}
-			
-			protected function onRemove():void
+			private function onRemove():void
 			{
 				if(map)
 				{

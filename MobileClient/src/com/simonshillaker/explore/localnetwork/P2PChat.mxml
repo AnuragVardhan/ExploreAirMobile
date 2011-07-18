@@ -3,6 +3,7 @@
 					 xmlns:fx="http://ns.adobe.com/mxml/2009"
 					 xmlns:s="library://ns.adobe.com/flex/spark"
 					 title="{ResourceBundleUtil.CHAT_TITLE}"
+					 creationComplete="onCreationComplete(event)"
 					 viewActivate="initialise()">
 	
 	<core:layout>
@@ -12,7 +13,9 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import com.simonshillaker.explore.core.PageInfo;
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			import com.simonshillaker.explore.core.SourceURLs;
 			import com.simonshillaker.network.P2PSenderReceiver;
 			
 			import mx.events.FlexEvent;
@@ -20,6 +23,13 @@
 			private var networkConnector:P2PSenderReceiver = new P2PSenderReceiver();
 			
 			private var username:String;
+			
+			private function onCreationComplete(event:FlexEvent):void
+			{
+				info = new PageInfo(title,
+					ResourceBundleUtil.P2P_CHAT_INFO,
+					SourceURLs.P2P_CHAT);
+			}
 			
 			private function initialise():void
 			{
@@ -33,7 +43,7 @@
 				receivedChatArea.text += event.info.message;
 			}
 			
-			protected function messageInput_enterHandler(event:FlexEvent):void
+			private function messageInput_enterHandler(event:FlexEvent):void
 			{
 				var chatString:String = "\n" + username + ": " + messageInput.text;
 				

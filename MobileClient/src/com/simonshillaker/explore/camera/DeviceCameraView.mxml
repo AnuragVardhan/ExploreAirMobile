@@ -11,7 +11,9 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import com.simonshillaker.explore.core.PageInfo;
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			import com.simonshillaker.explore.core.SourceURLs;
 			
 			import spark.components.Label;
 				
@@ -36,6 +38,9 @@
 					cameraSupported = false;
 				}
 				
+				info = new PageInfo(title,
+					ResourceBundleUtil.DEVICE_CAMERA_INFO,
+					SourceURLs.DEVICE_CAMERA);
 			}
 
 			private function handleCameraButtonClick(event:MouseEvent):void
