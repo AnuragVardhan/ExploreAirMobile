@@ -5,25 +5,34 @@
 					 creationComplete="onCreationComplete()"
 					 title="{ResourceBundleUtil.DEVICE_CAMERA_TITLE}">
 	
+	<core:states>
+		<s:State name="default" />
+		<s:State name="cameraNotSupported" />
+	</core:states>
+	
 	<fx:Script>
 		<![CDATA[
 			import com.simonshillaker.explore.core.PageInfo;
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
 			import com.simonshillaker.explore.core.SourceURLs;
 			
+			import mx.utils.ObjectUtil;
+			
+			import org.osmf.elements.ImageLoader;
+			
 			import spark.components.Label;
 				
 			private var cameraUI:CameraUI
-			
-			[Bindable]
-			private var cameraSupported:Boolean = true;
+			private var loader:Loader;
 			
 			protected function onCreationComplete():void
 			{
+				info = new PageInfo(title,
+					ResourceBundleUtil.DEVICE_CAMERA_INFO,
+					SourceURLs.DEVICE_CAMERA);
+				
 				if(CameraUI.isSupported)
 				{
-					cameraSupported = true;
-					
 					cameraUI = new CameraUI();
 					cameraUI.addEventListener(MediaEvent.COMPLETE, handlePhotoTaken);
 					
@@ -31,12 +40,8 @@
 				}
 				else 
 				{
-					cameraSupported = false;
+					this.currentState = "cameraNotSupported";
 				}
-				
-				info = new PageInfo(title,
-					ResourceBundleUtil.DEVICE_CAMERA_INFO,
-					SourceURLs.DEVICE_CAMERA);
 			}
 
 			private function handleCameraButtonClick(event:MouseEvent):void
@@ -46,22 +51,40 @@
 			
 			private function handlePhotoTaken(event:MediaEvent):void
 			{
-				imageUrl.text = event.data.file.url;
-				image.source = event.data.file.url;
+				var mediaPromise:MediaPromise = event.data;
+				
+				loader = new Loader();
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, imageLoadComplete);
+				loader.loadFilePromise(mediaPromise);
+				
+				if(mediaPromise.file)
+				{
+					imageUrl.text = mediaPromise.file.nativePath;
+				}
 			}
+			
+			private function imageLoadComplete(event:Event):void
+			{
+				fileType.text = event.target.contentType;
+				image.source = event.target.content;
+			}
+			
 		]]>
 	</fx:Script>
 	<core:layout>
 		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</core:layout>
 	
-	<s:Label visible="{!cameraSupported}" includeInLayout="{!cameraSupported}"
+	<s:Label includeIn="cameraNotSupported"
 			 text="CameraUI not supported."/>
 	
-	<s:Button id="cameraButton" visible="{cameraSupported}" label="Take Another"
-			  click="handleCameraButtonClick(event)" includeInLayout="{cameraSupported}"/>
+	<s:Button id="cameraButton" 
+			  label="Take Another"
+			  click="handleCameraButtonClick(event)"
+			  excludeFrom="cameraNotSupported"/>
 	
-	<s:Label id="imageUrl" text="" width="100%"/>
-	<s:Image id="image" height="100%" width="100%"/>
+	<s:Label id="fileType" width="100%" excludeFrom="cameraNotSupported"/>
+	<s:Label id="imageUrl" width="100%" excludeFrom="cameraNotSupported"/>
 
+	<s:Image id="image" width="100%" height="100%" excludeFrom="cameraNotSupported"/>
 </core:BackButtonView>

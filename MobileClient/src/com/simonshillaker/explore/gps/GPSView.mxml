@@ -18,6 +18,7 @@
 			import com.google.maps.MapType;
 			import com.google.maps.controls.ScaleControl;
 			import com.google.maps.controls.ZoomControl;
+			import com.google.maps.overlays.Marker;
 			import com.simonshillaker.explore.core.PageInfo;
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
 			import com.simonshillaker.explore.core.SourceURLs;
@@ -115,6 +116,8 @@
 				if(isMapReady)
 				{
 					map.setCenter(new LatLng(latitude, longitude), 14, MapType.NORMAL_MAP_TYPE);
+					var marker:Marker = new Marker(new LatLng(latitude, longitude));
+					map.addOverlay(marker);
 				}
 			}
 			

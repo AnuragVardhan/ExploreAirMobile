@@ -18,6 +18,7 @@
 			import com.google.maps.MapType;
 			import com.google.maps.controls.ScaleControl;
 			import com.google.maps.controls.ZoomControl;
+			import com.google.maps.overlays.Marker;
 			import com.google.maps.services.ClientGeocoder;
 			import com.simonshillaker.explore.core.PageInfo;
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
@@ -57,7 +58,10 @@
 			{
 				isMapReady = true;
 				
-				map.setCenter(new LatLng(40.736072, -73.992062), 14, MapType.NORMAL_MAP_TYPE);	
+				map.setCenter(new LatLng(48.85 , 2.35), 14, MapType.NORMAL_MAP_TYPE);	
+			
+				var marker:Marker = new Marker( new LatLng(48.85 , 2.35));
+				map.addOverlay(marker);
 				
 				map.addControl(new ScaleControl());
 				map.addControl(new ZoomControl());
