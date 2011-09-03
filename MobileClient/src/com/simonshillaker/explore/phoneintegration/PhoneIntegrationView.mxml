@@ -14,7 +14,10 @@
 			import com.simonshillaker.explore.localdb.LocalDatabaseView;
 			import com.simonshillaker.explore.localnetwork.P2PChatLogin;
 			import com.simonshillaker.explore.maps.MapsView;
+			import com.simonshillaker.explore.multitouch.MultitouchView;
 			import com.simonshillaker.explore.web.WebView;
+			
+			import mx.resources.ResourceBundle;
 			
 			protected function phoneButton_clickHandler(event:MouseEvent):void
 			{
@@ -56,6 +59,10 @@
 			<s:Button width="100%"
 					  label="{ResourceBundleUtil.ACCELEROMETER_TITLE}"
 					  click="navigator.pushView(AccelerometerView)"/>
+			
+			<s:Button width="100%"
+					  label="{ResourceBundleUtil.MULTITOUCH_TITLE}"
+					  click="navigator.pushView(MultitouchView)" />
 			
 			<s:Button width="100%"
 					  label="{ResourceBundleUtil.CAMERA_TITLE}"

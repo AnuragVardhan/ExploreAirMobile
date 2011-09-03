@@ -13,7 +13,8 @@ package com.simonshillaker.explore.core
 		public static const LOCAL_DB:String = BASE_URL + "localdb/LocalDatabaseView.mxml";
 		public static const P2P_CHAT:String = BASE_URL + "localnetwork/P2PChat.mxml";
 		public static const GOOGLE_MAPS:String = BASE_URL + "maps/GoogleMapsView.mxml";
+		public static const MULTITOUCH:String = BASE_URL + "multitouch/MultitouchView.mxml";
 		public static const WEB:String = BASE_URL + "web/WebView.mxml";
-		
+
 	}
 }

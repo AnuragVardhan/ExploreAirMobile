@@ -77,6 +77,9 @@ package com.simonshillaker.explore.core
 		public static const INTERNAL_BROWSER_TITLE:String = getFromBundle('internal_browser_title');
 		public static const NATIVE_BROWSER_TITLE:String = getFromBundle('native_browser_title');
 
+		//Multitouch
+		public static const MULTITOUCH_DISABLED:String = getFromBundle('multitouch_disabled');
+		public static const MULTITOUCH_TITLE:String = getFromBundle('multitouch_title');
 		
 		//Info
 		public static const INFO_BUTTON_LABEL:String = getFromBundle('info_button_label');
@@ -91,6 +94,7 @@ package com.simonshillaker.explore.core
 		public static const P2P_CHAT_INFO:String = getFromBundle('p2p_chat_info');
 		public static const MAPS_INFO:String = getFromBundle('maps_info');
 		public static const INTERNAL_BROWSER_INFO:String = getFromBundle('internal_browser_info');
+		public static const MULTITOUCH_INFO:String = getFromBundle("multitouch_info");
 
 		//Source code
 		public static const INFO_SOURCE_CODE_BUTTON_LABEL:String = getFromBundle('info_source_code_button_label');

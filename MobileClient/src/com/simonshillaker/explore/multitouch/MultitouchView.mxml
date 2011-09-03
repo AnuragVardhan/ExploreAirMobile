@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
+					 xmlns:fx="http://ns.adobe.com/mxml/2009"
+					 xmlns:s="library://ns.adobe.com/flex/spark"
+					 creationComplete="onCreationComplete(event)" 
+					 title="{ResourceBundleUtil.MULTITOUCH_TITLE}"
+					 >
+	<fx:Script>
+		<![CDATA[
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
+		]]>
+	</fx:Script>
+	
+	<core:states>
+		<s:State name="default"/>
+		<s:State name="dragging" />
+		<s:State name="multitouchDisabled"/>
+	</core:states>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.simonshillaker.explore.core.SourceURLs;
+			import com.simonshillaker.explore.core.PageInfo;
+			import mx.events.FlexEvent;
+	
+			override protected function measure():void
+			{
+				super.measure();
+			}
+			
+			private function onCreationComplete(event:FlexEvent):void
+			{
+				this.info = new PageInfo(ResourceBundleUtil.MULTITOUCH_TITLE, ResourceBundleUtil.MULTITOUCH_INFO, SourceURLs.MULTITOUCH); 
+				
+				if(!Multitouch.supportsTouchEvents)
+				{
+					this.currentState = "multitouchDisabled";
+				}
+			
+				Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
+				
+				this.stage.addEventListener(TouchEvent.TOUCH_BEGIN, onTouchBegin);
+				this.stage.addEventListener(TouchEvent.TOUCH_END, onTouchEnd);
+				this.stage.addEventListener(TouchEvent.TOUCH_MOVE, onTouchMove);
+				
+			}
+			
+			private function onTouchBegin(event:TouchEvent):void
+			{
+				this.currentState = "dragging";
+				
+			}
+			
+			private function onTouchEnd(event:TouchEvent):void
+			{
+				this.currentState = "default";		
+			}
+			
+			private function onTouchMove(event:TouchEvent):void
+			{
+				var localEventPoint:Point = measurementAid.globalToLocal(new Point(event.stageX, event.stageY));
+				
+				radialGradient.x = localEventPoint.x;
+				radialGradient.y = localEventPoint.y;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<core:layout>
+		<s:BasicLayout />
+	</core:layout>
+	
+	<s:Group id="measurementAid" top="0" right="0" left="0" bottom="0" />
+		
+	<s:Rect id="background" top="0" right="0" left="0" bottom="0">
+		
+		<s:fill.default>
+			<s:SolidColor color="0x0000ff" />
+		</s:fill.default>
+		
+		<s:fill.dragging>
+			<s:RadialGradient id="radialGradient" focalPointRatio="0" >
+				<s:entries>
+					<s:GradientEntry color="0xff0000" alpha="1.0" />
+					<s:GradientEntry color="0xffff00" alpha="1.0" />
+					<s:GradientEntry color="0x0000ff" alpha="1.0" />
+				</s:entries>
+			</s:RadialGradient>
+		</s:fill.dragging>
+	</s:Rect>
+	
+	<s:Label includeIn="multitouchDisabled" 
+			 text="{ResourceBundleUtil.MULTITOUCH_DISABLED}" 
+			 verticalCenter="0"
+			 horizontalCenter="0"/>
+	
+</core:BackButtonView>
