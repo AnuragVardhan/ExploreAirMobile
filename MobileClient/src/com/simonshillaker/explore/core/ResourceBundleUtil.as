@@ -24,9 +24,11 @@ package com.simonshillaker.explore.core
 
 		//Camera
 		public static const CAMERA_TITLE:String = getFromBundle('camera_title');
-		public static const EMBEDDED_CAMERA_TITLE:String = getFromBundle('embedded_camera_title');
+		public static const CAMERA_ROLL_TITLE:String = getFromBundle('camera_roll_title');
 		public static const DEVICE_CAMERA_TITLE:String = getFromBundle('device_camera_title');
 		public static const CAMERA_NOT_SUPPORTED:String = getFromBundle('camera_not_supported');
+		public static const CAMERA_ROLL_NOT_SUPPORTED:String = getFromBundle('camera_roll_not_supported');
+		public static const GO_TO_CAMERA_ROLL:String = getFromBundle('go_to_camera_roll');
 		
 		//Email
 		public static const EMAIL_TITLE:String = getFromBundle('email_title');
@@ -82,12 +84,13 @@ package com.simonshillaker.explore.core
 		public static const MULTITOUCH_TITLE:String = getFromBundle('multitouch_title');
 		
 		//Info
+		public static const ABOUT_BUTTON_LABEL:String = getFromBundle('about_button_label');
 		public static const INFO_BUTTON_LABEL:String = getFromBundle('info_button_label');
 		public static const INFO_SUFFIX:String = getFromBundle('info_suffix');
 		public static const NO_INFO_AVAILABLE:String = getFromBundle('no_info_available');
 		public static const ACCELEROMETER_INFO:String = getFromBundle('accelerometer_info');
 		public static const DEVICE_CAMERA_INFO:String = getFromBundle('device_camera_info');
-		public static const EMBEDDED_CAMERA_INFO:String = getFromBundle('embedded_camera_info');
+		public static const CAMERA_ROLL_INFO:String = getFromBundle('camera_roll_info');
 		public static const EMAIL_INFO:String = getFromBundle('email_info');
 		public static const GPS_INFO:String = getFromBundle('gps_info');
 		public static const LOCAL_DB_INFO:String = getFromBundle('local_db_info');

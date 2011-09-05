@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
-					 xmlns:fx="http://ns.adobe.com/mxml/2009"
-					 xmlns:s="library://ns.adobe.com/flex/spark"
-					 title="{ResourceBundleUtil.PHONE_INTEGRATION_TITLE}">
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		title="{ResourceBundleUtil.HOME_WELCOME_TITLE}"
+		>
 	
 	<fx:Script>
 		<![CDATA[
 			import com.simonshillaker.explore.accelerometer.AccelerometerView;
 			import com.simonshillaker.explore.camera.CameraView;
+			import com.simonshillaker.explore.core.PageInfo;
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
 			import com.simonshillaker.explore.email.EmailView;
 			import com.simonshillaker.explore.gps.GPSView;
+			import com.simonshillaker.explore.home.HomeView;
 			import com.simonshillaker.explore.localdb.LocalDatabaseView;
 			import com.simonshillaker.explore.localnetwork.P2PChatLogin;
 			import com.simonshillaker.explore.maps.MapsView;
 			import com.simonshillaker.explore.multitouch.MultitouchView;
 			import com.simonshillaker.explore.web.WebView;
 			
+			import mx.events.FlexEvent;
 			import mx.resources.ResourceBundle;
 			
 			protected function phoneButton_clickHandler(event:MouseEvent):void
@@ -32,44 +35,39 @@
 		]]>
 	</fx:Script>
 	
+	<s:actionContent>
+		<s:Button label="{ResourceBundleUtil.ABOUT_BUTTON_LABEL}" click="navigator.pushView(HomeView)"/>
+	</s:actionContent>
+	
 	<s:Scroller width="100%" height="100%">
 		
 		<s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
 			
-			<s:Button width="100%"
-					  label="{ResourceBundleUtil.LOCAL_DB_TITLE}"
+			<s:Button width="100%" label="{ResourceBundleUtil.LOCAL_DB_TITLE}"
 					  click="navigator.pushView(LocalDatabaseView)"/>
 			
-			<s:Button width="100%"
-					  label="{ResourceBundleUtil.CHAT_TITLE}"
+			<s:Button width="100%" label="{ResourceBundleUtil.CHAT_TITLE}"
 					  click="navigator.pushView(P2PChatLogin)"/>
 	
-			<s:Button width="100%"
-					  label="{ResourceBundleUtil.GPS_TITLE}"
+			<s:Button width="100%" label="{ResourceBundleUtil.GPS_TITLE}"
 					  click="navigator.pushView(GPSView)"/>
 			
-			<s:Button width="100%"
-					  label="{ResourceBundleUtil.WEB_TITLE}"
+			<s:Button width="100%" label="{ResourceBundleUtil.WEB_TITLE}"
 					  click="navigator.pushView(WebView)"/>
 			
-			<s:Button width="100%"
-					  label="{ResourceBundleUtil.MAPS_TITLE}"
+			<s:Button width="100%" label="{ResourceBundleUtil.MAPS_TITLE}"
 					  click="navigator.pushView(MapsView)"/>
 		
-			<s:Button width="100%"
-					  label="{ResourceBundleUtil.ACCELEROMETER_TITLE}"
+			<s:Button width="100%" label="{ResourceBundleUtil.ACCELEROMETER_TITLE}"
 					  click="navigator.pushView(AccelerometerView)"/>
 			
-			<s:Button width="100%"
-					  label="{ResourceBundleUtil.MULTITOUCH_TITLE}"
-					  click="navigator.pushView(MultitouchView)" />
+			<s:Button width="100%" label="{ResourceBundleUtil.MULTITOUCH_TITLE}"
+					  click="navigator.pushView(MultitouchView)"/>
 			
-			<s:Button width="100%"
-					  label="{ResourceBundleUtil.CAMERA_TITLE}"
+			<s:Button width="100%" label="{ResourceBundleUtil.CAMERA_TITLE}"
 					  click="navigator.pushView(CameraView)"/>
 			
-			<s:Button width="100%"
-					  label="{ResourceBundleUtil.EMAIL_TITLE}"
+			<s:Button width="100%" label="{ResourceBundleUtil.EMAIL_TITLE}"
 					  click="navigator.pushView(EmailView)"/>
 			
 			<s:Button id="phoneButton" width="100%" label="Phone"
@@ -81,5 +79,5 @@
 		
 	</s:Scroller>
 	
-</core:BackButtonView>
+</s:View>
 	

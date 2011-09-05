@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
+		xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		viewActivate="onViewActivate(event)" 
+		title="{ResourceBundleUtil.CAMERA_ROLL_TITLE}"
+		creationComplete="onCreationComplete(event)"
+		>
+	
+	<core:states>
+		<s:State name="default" />
+		<s:State name="notSupported" />
+	</core:states>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.simonshillaker.explore.core.PageInfo;
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			import com.simonshillaker.explore.core.SourceURLs;
+			
+			import mx.events.FlexEvent;
+			
+			import spark.events.ViewNavigatorEvent;
+			
+			private var cameraRoll:CameraRoll;
+			
+			private var imageHeight:int;
+			private var imageWidth:int;
+			
+			private function onViewActivate(event:ViewNavigatorEvent):void
+			{
+				if(!Multitouch.supportsGestureEvents)
+				{
+					multitouchNotSupportedLabel.visible = true;
+					multitouchNotSupportedLabel.includeInLayout = true;
+				}
+			
+				if (!CameraRoll.supportsBrowseForImage)
+				{
+					currentState = "notSupported";
+					return;
+				} 
+
+				cameraRoll = new CameraRoll();
+				cameraRoll.addEventListener(MediaEvent.SELECT,onImageSelect);
+				
+				goToRollButton.addEventListener(MouseEvent.CLICK,onButtonClick);             
+			}
+			
+			private function onButtonClick(event:MouseEvent):void
+			{        
+				image.removeEventListener(TransformGestureEvent.GESTURE_ZOOM, onImageZoom);	
+				image.removeEventListener(TransformGestureEvent.GESTURE_ROTATE, onImageRotate);
+				
+				cameraRoll.browseForImage();         
+			}
+			
+			private function onImageSelect(event:MediaEvent):void
+			{
+				var mediaPromise:MediaPromise = event.data;
+				image.source = mediaPromise.file.url;
+				image.width = stage.width - 20;
+				
+				image.rotation = 0;
+				image.scaleX = 1;
+				image.scaleY = 1;
+				
+				image.addEventListener(TransformGestureEvent.GESTURE_ZOOM, onImageZoom);	
+				image.addEventListener(TransformGestureEvent.GESTURE_ROTATE, onImageRotate);
+			}
+			
+			private function onImageZoom(event:TransformGestureEvent):void
+			{
+				image.scaleX *= event.scaleX;
+				image.scaleY *= event.scaleY;
+			}
+			
+			private function onImageRotate(event:TransformGestureEvent):void
+			{
+				image.rotation += event.rotation;
+			}
+			
+			private function onCreationComplete(event:FlexEvent):void
+			{
+				this.info = new PageInfo(ResourceBundleUtil.CAMERA_ROLL_TITLE, ResourceBundleUtil.CAMERA_ROLL_INFO, SourceURLs.CAMERA_ROLL);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<core:layout>
+		<s:BasicLayout />
+	</core:layout>
+	
+	<s:Label id="multitouchNotSupportedLabel" 
+			 text="{ResourceBundleUtil.MULTITOUCH_DISABLED}" 
+			 horizontalCenter="0"
+			 includeInLayout="false"
+			 visible="false"
+			 bottom="5"/>
+	
+	<s:Label text="{ResourceBundleUtil.CAMERA_ROLL_NOT_SUPPORTED}" 
+			 verticalCenter="0" 
+			 horizontalCenter="0" 
+			 includeIn="notSupported"/> 
+	
+	<s:Button id="goToRollButton" 
+			  top="5"
+			  height="50"
+			  horizontalCenter="0"
+			  label="{ResourceBundleUtil.GO_TO_CAMERA_ROLL}" 
+			  includeIn="default"/>
+	
+	<s:Image includeIn="default" 
+			 horizontalCenter="0"
+			 verticalCenter="0"
+			 id="image"/>
+
+</core:BackButtonView>

@@ -6,7 +6,7 @@ package com.simonshillaker.explore.core
 		public var info:String;
 		public var sourceUrl:String;
 		
-		public function PageInfo(title:String, info:String, sourceUrl:String)
+		public function PageInfo(title:String, info:String, sourceUrl:String = null)
 		{
 			this.title = title;
 			this.info = info;

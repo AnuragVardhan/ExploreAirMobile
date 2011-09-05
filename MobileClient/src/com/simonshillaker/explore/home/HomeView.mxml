@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
-		title="{ResourceBundleUtil.HOME_TITLE}" 
+		title="{ResourceBundleUtil.ABOUT_BUTTON_LABEL}" 
 		xmlns:core="com.simonshillaker.explore.core.*">
 
 	<fx:Script>
@@ -32,6 +32,11 @@
 		]]>
 	</fx:Script>
 	
+	<s:navigationContent>
+		<s:Button id="backButton" 
+				  label="{ResourceBundleUtil.BACK_LABEL}"
+				  click="navigator.popView()"/>
+	</s:navigationContent>
 	
 	<s:VGroup gap="20" 
 			  horizontalAlign="center" 

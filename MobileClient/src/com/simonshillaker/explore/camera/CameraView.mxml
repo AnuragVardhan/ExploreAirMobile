@@ -16,7 +16,7 @@
 	<s:Button id="deviceCameraButton" width="100%" label="{ResourceBundleUtil.DEVICE_CAMERA_TITLE}"
 			  click="navigator.pushView(DeviceCameraView)"/>
 	
-	<s:Button id="embeddedCamera" width="100%" label="{ResourceBundleUtil.EMBEDDED_CAMERA_TITLE}"
-			  click="navigator.pushView(EmbeddedCameraView)"/>
+	<s:Button id="embeddedCamera" width="100%" label="{ResourceBundleUtil.CAMERA_ROLL_TITLE}"
+			  click="navigator.pushView(CameraRollView)"/>
 	
 </core:BackButtonView>

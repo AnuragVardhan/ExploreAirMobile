@@ -7,7 +7,7 @@ package com.simonshillaker.explore.core
 		
 		public static const ACCELEROMETER:String = BASE_URL + "accelerometer/AccelerometerView.mxml";
 		public static const DEVICE_CAMERA:String = BASE_URL + "camera/DeviceCameraView.mxml";
-		public static const EMBEDDED_CAMERA:String = BASE_URL + "camera/EmbeddedCameraView.mxml";
+		public static const CAMERA_ROLL:String = BASE_URL + "camera/CameraRollView.mxml";
 		public static const EMAIL:String = BASE_URL + "email/EmailView.mxml";
 		public static const GPS:String = BASE_URL + "gps/GPSView.mxml";
 		public static const LOCAL_DB:String = BASE_URL + "localdb/LocalDatabaseView.mxml";
