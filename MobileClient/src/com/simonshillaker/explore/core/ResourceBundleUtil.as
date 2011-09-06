@@ -22,6 +22,9 @@ package com.simonshillaker.explore.core
 		public static const TOUR_DE_FLEX_URL:String = getFromBundle('tour_de_flex_url');
 		public static const PHONE_INTEGRATION_TITLE:String = getFromBundle('phone_integration_title');
 
+		public static const PHONE_TITLE:String = getFromBundle('phone_title');
+		public static const SMS_TITLE:String = getFromBundle('sms_title');
+		
 		//Camera
 		public static const CAMERA_TITLE:String = getFromBundle('camera_title');
 		public static const CAMERA_ROLL_TITLE:String = getFromBundle('camera_roll_title');

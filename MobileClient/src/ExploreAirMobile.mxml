@@ -3,7 +3,7 @@
 								  xmlns:s="library://ns.adobe.com/flex/spark"
 								  splashScreenImage="@Embed('assets/SplashImage.png')"
 								  frameRate="15"
-								  firstView="{PhoneIntegrationView}"
+								  firstView="{MainMenuView}"
 								  >
 	
 	<fx:Metadata>
@@ -12,7 +12,7 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import com.simonshillaker.explore.phoneintegration.PhoneIntegrationView;
+			import com.simonshillaker.explore.mainmenu.MainMenuView;
 		]]>
 	</fx:Script>
 	

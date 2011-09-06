@@ -16,10 +16,6 @@
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
 			import com.simonshillaker.explore.core.SourceURLs;
 			
-			import mx.utils.ObjectUtil;
-			
-			import org.osmf.elements.ImageLoader;
-			
 			import spark.components.Label;
 				
 			private var cameraUI:CameraUI
@@ -79,7 +75,7 @@
 			 text="CameraUI not supported."/>
 	
 	<s:Button id="cameraButton" 
-			  label="Take Another"
+			  label="Go to device camera"
 			  click="handleCameraButtonClick(event)"
 			  excludeFrom="cameraNotSupported"/>
 	

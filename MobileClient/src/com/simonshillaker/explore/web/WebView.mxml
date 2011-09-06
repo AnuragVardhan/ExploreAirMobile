@@ -2,11 +2,8 @@
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
 		xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
-		title="{ResourceBundleUtil.WEB_TITLE}">
-	
-	<core:layout>
-		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
-	</core:layout>
+		title="{ResourceBundleUtil.WEB_TITLE}"
+		creationComplete="onCreationComplete(event)">
 	
 	<fx:Script>
 		<![CDATA[
@@ -14,24 +11,41 @@
 			
 			import flash.net.navigateToURL;
 			
-			private function goToNativeWebBrowser():void {
-				var url:String = ResourceBundleUtil.WEB_DEFAULT_URL;
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			import mx.states.AddItems;
+			
+			import spark.events.IndexChangeEvent;
+			
+			private function onCreationComplete(event:FlexEvent):void
+			{
+				var options:ArrayCollection = new ArrayCollection();
 				
-				navigateToURL(new URLRequest(url));
+				options.addItem(ResourceBundleUtil.INTERNAL_BROWSER_TITLE);
+				options.addItem(ResourceBundleUtil.NATIVE_BROWSER_TITLE);
+
+				list.dataProvider = options;
 			}
+			
+			private function onListSelection(event:IndexChangeEvent):void
+			{
+				switch(list.selectedItem)
+				{
+					case(ResourceBundleUtil.INTERNAL_BROWSER_TITLE):
+						navigator.pushView(InternalBrowser)
+						break;
+					case(ResourceBundleUtil.NATIVE_BROWSER_TITLE):
+						var url:String = ResourceBundleUtil.WEB_DEFAULT_URL;
+						navigateToURL(new URLRequest(url));
+						break;
+				}
+				
+			}
+			
 		]]>
 	</fx:Script>
 	
+	<s:List id="list" width="100%" height="100%" change="onListSelection(event)"/>
 	
-	<s:Button label="{ResourceBundleUtil.INTERNAL_BROWSER_TITLE}" 
-			  id="embeddedBrowserButton" 
-			  width="100%" 
-			  click="navigator.pushView(InternalBrowser)" />
-
-	<s:Button label="{ResourceBundleUtil.NATIVE_BROWSER_TITLE}" 
-			  id="nativeBrowserButton" 
-			  width="100%" 
-			  click="goToNativeWebBrowser()" />
-
 </core:BackButtonView>
 	

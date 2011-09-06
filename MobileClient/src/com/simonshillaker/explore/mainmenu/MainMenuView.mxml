@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		creationComplete="onCreationComplete(event)" title="{ResourceBundleUtil.HOME_WELCOME_TITLE}">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.simonshillaker.explore.about.AboutView;
+			import com.simonshillaker.explore.accelerometer.AccelerometerView;
+			import com.simonshillaker.explore.camera.CameraView;
+			import com.simonshillaker.explore.core.PageInfo;
+			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			import com.simonshillaker.explore.email.EmailView;
+			import com.simonshillaker.explore.gps.GPSView;
+			import com.simonshillaker.explore.localdb.LocalDatabaseView;
+			import com.simonshillaker.explore.localnetwork.P2PChatLogin;
+			import com.simonshillaker.explore.maps.MapsView;
+			import com.simonshillaker.explore.multitouch.MultitouchView;
+			import com.simonshillaker.explore.web.WebView;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			import mx.resources.ResourceBundle;
+			
+			import spark.events.IndexChangeEvent;
+
+			protected function onCreationComplete(event:FlexEvent):void
+			{
+				var listContents:ArrayCollection = new ArrayCollection();
+				
+				listContents.addItem(ResourceBundleUtil.LOCAL_DB_TITLE);
+				listContents.addItem(ResourceBundleUtil.CHAT_TITLE);
+				listContents.addItem(ResourceBundleUtil.GPS_TITLE);
+				listContents.addItem(ResourceBundleUtil.WEB_TITLE);
+				listContents.addItem(ResourceBundleUtil.MAPS_TITLE);
+				listContents.addItem(ResourceBundleUtil.ACCELEROMETER_TITLE);
+				listContents.addItem(ResourceBundleUtil.MULTITOUCH_TITLE);
+				listContents.addItem(ResourceBundleUtil.CAMERA_TITLE);
+				listContents.addItem(ResourceBundleUtil.EMAIL_TITLE);
+				listContents.addItem(ResourceBundleUtil.PHONE_TITLE);
+				listContents.addItem(ResourceBundleUtil.SMS_TITLE);
+				
+				list.dataProvider = listContents;
+			}
+			
+			protected function onListSelection(event:IndexChangeEvent):void
+			{
+				switch(list.selectedItem)
+				{
+					case(ResourceBundleUtil.LOCAL_DB_TITLE):
+						navigator.pushView(LocalDatabaseView);
+						break;
+					case(ResourceBundleUtil.CHAT_TITLE):
+						navigator.pushView(P2PChatLogin);
+						break;
+					case(ResourceBundleUtil.GPS_TITLE):
+						navigator.pushView(GPSView);
+						break;
+					case(ResourceBundleUtil.WEB_TITLE):
+						navigator.pushView(WebView);
+						break;
+					case(ResourceBundleUtil.MAPS_TITLE):
+						navigator.pushView(MapsView);
+						break;
+					case(ResourceBundleUtil.ACCELEROMETER_TITLE):
+						navigator.pushView(AccelerometerView);
+						break;
+					case(ResourceBundleUtil.MULTITOUCH_TITLE):
+						navigator.pushView(MultitouchView);
+						break;
+					case(ResourceBundleUtil.CAMERA_TITLE):
+						navigator.pushView(CameraView);
+						break;
+					case(ResourceBundleUtil.EMAIL_TITLE):
+						navigator.pushView(EmailView);
+						break;
+					case(ResourceBundleUtil.PHONE_TITLE):
+						navigateToURL(new URLRequest('tel:000111222'));
+						break;
+					case(ResourceBundleUtil.SMS_TITLE):
+						navigateToURL(new URLRequest('sms:000111222'));
+						break;
+					default:
+						break;
+				}				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:actionContent>
+		<s:Button label="{ResourceBundleUtil.ABOUT_BUTTON_LABEL}"
+				  click="navigator.pushView(AboutView)"/>
+	</s:actionContent>
+	
+	<s:List id="list" change="onListSelection(event)"
+			width="100%" height="100%"/>
+</s:View>
