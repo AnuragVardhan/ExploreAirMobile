@@ -46,6 +46,8 @@ package com.simonshillaker.explore.localdb
 		
 		override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
 		{
+			super.updateDisplayList(unscaledWidth, unscaledHeight);
+			
 			idLabel.x = PADDING;
 			usernameLabel.x = PADDING;
 			nameLabel.x = PADDING;
@@ -54,7 +56,7 @@ package com.simonshillaker.explore.localdb
 			usernameLabel.y = 2*PADDING + LABEL_HEIGHT;
 			nameLabel.y = 3*PADDING + 2*LABEL_HEIGHT;
 			
-//			drawDividerAtBottom(unscaledWidth, unscaledHeight - 1);
+			drawDividerAtBottom(unscaledWidth, unscaledHeight - 1);
 		}
 		
 		/////////////////////////////////////////

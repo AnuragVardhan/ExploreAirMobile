@@ -95,7 +95,7 @@
 					  click="handleAddUser(event)"/>
 			
 			<s:List width="100%" height="100%" minHeight="80" dataProvider="{userDao.users}"
-					itemRenderer="com.simonshillaker.explore.localdb.UserRenderer"/>
+					itemRenderer="com.simonshillaker.explore.localdb.UserItemRenderer"/>
 			
 			<s:Button width="100%"
 					  label="{ResourceBundleUtil.LOCAL_DB_CLEAR_DATA}"

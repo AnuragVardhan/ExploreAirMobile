@@ -10,12 +10,12 @@ s|ViewNavigator {
 s|ButtonBarButton {
 	fontSize: 20px;
 }
-
+/*
 localdb|UserRenderer
 {
-	color: #000000;	
+	color: #FF0000;	
 }
-
+*/
 s|Button {
 	fontSize: 20px;
 }

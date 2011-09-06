@@ -2,21 +2,43 @@
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
 					 xmlns:fx="http://ns.adobe.com/mxml/2009"
 					 xmlns:s="library://ns.adobe.com/flex/spark"
-					 title="{ResourceBundleUtil.CAMERA_TITLE}">
+					 title="{ResourceBundleUtil.CAMERA_TITLE}"
+					 creationComplete="onCreationComplete(event)">
 	<fx:Script>
 		<![CDATA[
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
+			import spark.events.IndexChangeEvent;
+			
+			private function onCreationComplete(event:FlexEvent):void
+			{
+				var listData:ArrayCollection = new ArrayCollection();
+				
+				listData.addItem(ResourceBundleUtil.DEVICE_CAMERA_TITLE);
+				listData.addItem(ResourceBundleUtil.CAMERA_ROLL_TITLE);
+				
+				list.dataProvider = listData;
+			}
+			
+			private function onListSelection(event:IndexChangeEvent):void
+			{
+				switch(list.selectedItem)
+				{
+					case(ResourceBundleUtil.DEVICE_CAMERA_TITLE):
+						navigator.pushView(DeviceCameraView);
+						break;
+					case(ResourceBundleUtil.CAMERA_ROLL_TITLE):
+						navigator.pushView(CameraRollView);
+						break;
+				}
+			}
+			
 		]]>
 	</fx:Script>
 	
-	<core:layout>
-		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
-	</core:layout>
-	
-	<s:Button id="deviceCameraButton" width="100%" label="{ResourceBundleUtil.DEVICE_CAMERA_TITLE}"
-			  click="navigator.pushView(DeviceCameraView)"/>
-	
-	<s:Button id="embeddedCamera" width="100%" label="{ResourceBundleUtil.CAMERA_ROLL_TITLE}"
-			  click="navigator.pushView(CameraRollView)"/>
+	<s:List id="list" height="100%" width="100%" change="onListSelection(event)" />
 	
 </core:BackButtonView>

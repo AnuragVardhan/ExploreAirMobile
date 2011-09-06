@@ -2,31 +2,44 @@
 <core:BackButtonView xmlns:core="com.simonshillaker.explore.core.*"
 		xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
-		title="{ResourceBundleUtil.MAPS_TITLE}">
-	
-	<core:layout>
-		<s:VerticalLayout verticalAlign="middle" horizontalAlign="center"/>
-	</core:layout>
+		title="{ResourceBundleUtil.MAPS_TITLE}"
+		creationComplete="onCreationComplete(event)">
 	
 	<fx:Script>
 		<![CDATA[
 			import com.simonshillaker.explore.core.ResourceBundleUtil;
 			
-			import flash.net.navigateToURL;
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
+			import spark.events.IndexChangeEvent;
 			
 			private var WATERLOO_URL:String = 'http://maps.google.co.uk/maps?f=q&source=s_q&hl=en&q=Waterloo+Station,+York+Rd,+London+SE1,+United+Kingdom&aq=&sll=51.504722,-0.110915&sspn=0.010084,0.017831&ie=UTF8&geocode=FcbiEQMdQEL-_w&split=0&hq=&hnear=Waterloo+Station,+York+Rd,+London+SE1+7ND,+United+Kingdom&ll=51.503574,-0.114069&spn=0.010084,0.017831&z=16';
+			
+			private function onCreationComplete(event:FlexEvent):void
+			{
+				var listData:ArrayCollection = new ArrayCollection();
+				
+				listData.addItem(ResourceBundleUtil.GOOGLE_MAPS_TITLE);
+				listData.addItem(ResourceBundleUtil.NATIVE_MAPS_TITLE);
+			}
+			
+			private function onListSelection(event:IndexChangeEvent):void
+			{
+				switch(list.selectedItem)
+				{
+					case(ResourceBundleUtil.GOOGLE_MAPS_TITLE):
+						navigator.pushView(GoogleMapsView); 
+						break;
+					case(ResourceBundleUtil.NATIVE_MAPS_TITLE):
+						navigateToURL(new URLRequest(WATERLOO_URL)); 
+						break;
+				}
+			}
 			
 		]]>
 	</fx:Script>
 	
-	<s:Button id="googleMapsButton" 
-			  label="{ResourceBundleUtil.GOOGLE_MAPS_TITLE}" 
-			  width="100%" 
-			  click="navigator.pushView(GoogleMapsView)" />
-	
-	<s:Button id="nativeMapsButton" 
-			  label="{ResourceBundleUtil.NATIVE_MAPS_TITLE}" 
-			  width="100%" 
-			  click="navigateToURL(new URLRequest(WATERLOO_URL))" />
+	<s:List width="100%" height="100%" id="list" change="onListSelection(event)" />
 	
 </core:BackButtonView>
